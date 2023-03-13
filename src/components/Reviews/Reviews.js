@@ -14,11 +14,11 @@ export const Reviews = () => {
         })
     },[]
     )
-  return (isLoading === false ? 
-    <ol className='reviewsSection'> 
-        {reviews.map(review => {
-            return <ReviewCard key={review.review_id} review={review}/>
-        })}
-    </ol> : <p>Loading...</p>)
+  return (isLoading ? 
+    <p>Loading...</p> : <ol className='reviewsSection'> 
+    {reviews.map(review => {
+        return <ReviewCard key={review.review_id} review={review}/>
+    })}
+</ol>)
 
 }
