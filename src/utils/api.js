@@ -5,15 +5,9 @@ const gamesApi = axios.create({
 })
 
 export const getReviews = () => {
-    return gamesApi.get('/reviews').then(({data}) => {
-        return data.reviews
-    })
-}
-
-export const getComments = (review_id) => {
-    return gamesApi.get(`/reviews/${review_id}/comments`).then(({data}) => {
-        return data.comments
-    })
+  return gamesApi.get('/reviews').then(({ data }) => {
+    return data.reviews
+  })
 }
 
 export const getReview = reviewId => {
@@ -21,3 +15,10 @@ export const getReview = reviewId => {
     return data.review
   })
 }
+
+export const getComments = review_id => {
+    return gamesApi.get(`/reviews/${review_id}/comments`).then(({ data }) => {
+      return data.comments
+    })
+  }
+  

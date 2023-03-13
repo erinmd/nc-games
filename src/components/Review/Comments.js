@@ -9,14 +9,19 @@ export const Comments = ({ review_id }) => {
     setIsLoading(true)
     getComments(review_id).then(comments => {
       setComments(comments)
+      console.log(comments)
       setIsLoading(false)
     })
   }, [])
   return (
-    <ol>
-      {comments.map(comment => {
-        return <CommentCard key={comment.comment_id} comment={comment} />
-      })}
-    </ol>
+    <>
+      
+      <ol className='commentsSection'>
+        <h3>Comments</h3>
+        {comments.map(comment => {
+          return <CommentCard key={comment.comment_id} comment={comment} />
+        })}
+      </ol>
+    </>
   )
 }

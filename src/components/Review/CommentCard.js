@@ -1,10 +1,10 @@
 export const CommentCard = ({ comment }) => {
   return (
     <li className='commentCard'>
-      <p>{comment.author}</p>
-      <p>{comment.body}</p>
-      <p>{new Date(comment.created_at).toDateString()}</p>
-      <p>{comment.votes}</p>
+      <p>Author: {comment.author}</p>
+      <p className='commentText'>Comment: {comment.body}</p>
+      <p>Date: {new Date(comment.created_at).toDateString()}</p>
+      <p>Votes: {comment.votes}</p>
     </li>
   )
 }
