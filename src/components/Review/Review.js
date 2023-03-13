@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import {useParams} from 'react-router-dom'
 import { getReview } from "../../utils/api"
+import { Comments } from "./Comments"
 
 export const Review = () => {
     const {review_id} = useParams()
@@ -23,6 +24,7 @@ export const Review = () => {
         <p>Owner: {review.owner}</p>
         <p>Created at: {new Date(review.created_at).toDateString()}</p>
         <p>Votes: {review.votes} Comments: {review.comment_count}</p>
+        <Comments review_id={review_id}/>
         </section>)
     
 }

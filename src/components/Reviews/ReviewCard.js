@@ -13,6 +13,5 @@ export const ReviewCard = ({review}) => {
         <p>Owner: {review.owner}</p>
         <p>Created at: {new Date(review.created_at).toDateString()}</p>
         <p>Votes: {review.votes} Comments: {review.comment_count}</p>
-       
         </li>
 }

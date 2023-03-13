@@ -15,3 +15,10 @@ export const getReview = reviewId => {
     return data.review
   })
 }
+
+export const getComments = review_id => {
+    return gamesApi.get(`/reviews/${review_id}/comments`).then(({ data }) => {
+      return data.comments
+    })
+  }
+  
