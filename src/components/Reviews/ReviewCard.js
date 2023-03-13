@@ -1,5 +1,11 @@
+import {useNavigate} from 'react-router-dom'
+
 export const ReviewCard = ({review}) => {
-    return <li className='reviewCard'>
+    const navigate = useNavigate()
+    const handleClick = () => {
+        navigate(`/reviews/${review.review_id}`)
+    }
+    return <li onClick={handleClick} className='reviewCard'>
         <h3>{review.title}</h3>
         <p>Designer: {review.designer}</p>
         <img className='reviewImage' src={review.review_img_url} alt={review.title}/>
