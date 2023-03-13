@@ -14,14 +14,13 @@ export const Comments = ({ review_id }) => {
     })
   }, [])
   return (
-    <>
-      
+    isLoading? <p>Loading...</p> :
       <ol className='commentsSection'>
         <h3>Comments</h3>
         {comments.map(comment => {
           return <CommentCard key={comment.comment_id} comment={comment} />
         })}
       </ol>
-    </>
+
   )
 }
