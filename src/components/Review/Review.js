@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { getReview } from '../../utils/api'
 import { ReviewVoteButton } from './ReviewVoteButton'
+import {useParams} from 'react-router-dom'
+import { Comments } from "./Comments"
 
 export const Review = () => {
   const { review_id } = useParams()
@@ -53,6 +54,8 @@ export const Review = () => {
         setButtonMessage = {setButtonMessage}
       />
       {buttonMessage ? <p>{buttonMessage}</p> : ''}
+      <Comments review_id={review_id}/>
     </section>
   )
 }
+

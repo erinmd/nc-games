@@ -75,3 +75,20 @@ nav {
   padding: 5px 10px;
   margin: 5px 5px
 }
+
+.commentsSection {
+  background-color: #7cb9a6;
+  border-radius: 20px;
+  padding:10px;
+}
+
+.commentCard {
+  background-color:#1B1B24;
+  list-style: none;
+  text-align: left;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 15px;
+  box-shadow:0 0 10px 2px #F0F0ED
+
+}
