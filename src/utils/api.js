@@ -28,3 +28,8 @@ export const getComments = review_id => {
     })
   }
   
+export const getCategories = () => {
+    return gamesApi.get('/categories').then(({data}) => {
+        return data.categories
+    })
+}
