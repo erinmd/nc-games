@@ -22,12 +22,22 @@ header {
 
 nav {
   color: #F0F0ED;
-  background-color: #596c79c8;
+  background-color: #596c79;
   width: 100%;
-  height: 50px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+}
+
+.navContainer {
+  color: #F0F0ED;
+  background-color: #596c79;
+  width: 100%;
+  display: inline;
+  align-items: center;
+  justify-content:center;
   gap: 20px;
 }
 
@@ -40,6 +50,26 @@ nav {
   border-radius: 8px;
 }
 
+
+.linkText {
+  color: #F0F0ED;
+  display: inline;
+  margin: 5px;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.catForm {
+  display: inline;
+}
+
+.navAvatar {
+  height: 50px;
+  display: inline
+}
+
+
 .selectCategory {
   background-color: #1B1B24;
   color: #F0F0ED;
@@ -47,9 +77,7 @@ nav {
   border-radius: 5px;
 }
 
-.linkText {
-  color: #F0F0ED
-}
+
 
 .reviewsContainer {
   width: 90%;
