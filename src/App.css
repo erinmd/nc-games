@@ -72,13 +72,15 @@ nav {
 
 
 .catHeader {
-  text-align: center;
-  padding: 10px;
+  text-align: left;
+  padding: 5px;
+  margin-left: 5%
 }
 
 .catDescription {
-  text-align: center;
-  padding: 10px;
+  text-align: left;
+  padding: 5px;
+  margin-left: 5%
 }
 
 

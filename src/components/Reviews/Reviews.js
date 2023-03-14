@@ -12,11 +12,11 @@ export const Reviews = () => {
   const [newCatLoading, setNewCatLoading] = useState(false)
 
   useEffect(() => {
-    setNewCatLoading(true)
+    setIsLoading(true)
     getReviews(category_name).then(reviews => {
       setReviews(reviews)
       setIsLoading(false)
-      setNewCatLoading(false)
+
     })
   }, [category_name])
 
@@ -42,10 +42,8 @@ export const Reviews = () => {
         <h2 className='catHeader'>All Games</h2>
       )}
       {category_name ? (
-        <p className='catDescription'>{newCatLoading ?  `${formatCategoryName(category_name)} games are loading...` : `Description: ${catDescription}`}</p>
-      ) : (
-        <p className='catDescription'>{newCatLoading ?  `All games are loading...` : ''}</p>
-      )}
+        <p className='catDescription'> Description: {catDescription}</p>
+      ) : ''}
       {isLoading ? (
         <p className='initialPageLoad'>Loading...</p>
       ) : (
