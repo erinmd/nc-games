@@ -4,7 +4,7 @@ import { ReviewCard } from './ReviewCard'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { formatCategoryName } from '../../utils/utils'
 
-export const Reviews = ({ submittedSort }) => {
+export const Reviews = ({ submittedSort, order }) => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const { category_name } = useParams()
@@ -12,19 +12,20 @@ export const Reviews = ({ submittedSort }) => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   useEffect(() => {
-    if (submittedSort !== 'Sort by') setSearchParams({ sort_by: submittedSort, order:'desc' })
-  }, [submittedSort, setSearchParams])
+    if (submittedSort !== 'Sort by') setSearchParams({ sort_by: submittedSort, order})
+  }, [submittedSort, setSearchParams, order])
 
   useEffect(() => {
     setIsLoading(true)
     let sortByApi = submittedSort.toLowerCase()
     if (submittedSort === 'Date') sortByApi = 'created_at'
-    if (submittedSort === 'Sort by') sortByApi = 'votes'
-    getReviews(category_name, sortByApi).then(reviews => {
+    else if (submittedSort === 'Sort by') sortByApi = 'votes'
+    else if (submittedSort === 'Comments') sortByApi = 'comment_count'
+    getReviews(category_name, sortByApi, order).then(reviews => {
       setReviews(reviews)
       setIsLoading(false)
     })
-  }, [category_name, submittedSort])
+  }, [category_name, submittedSort, order])
 
   useEffect(() => {
     if (category_name) {

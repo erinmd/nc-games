@@ -8,16 +8,17 @@ import { Reviews } from './components/Reviews/Reviews'
 
 function App () {
   const [submittedSort, setSubmittedSort] = useState('Sort by')
+  const [order, setOrder] = useState('desc')
   return (
     <main className='appContainer'>
-      <Nav setSubmittedSort={setSubmittedSort}
+      <Nav setSubmittedSort={setSubmittedSort} setOrder={setOrder}
       />
       <Header />
       <Routes>
-        <Route path='/*' element={<Reviews submittedSort={submittedSort}/>} />
+        <Route path='/*' element={<Reviews submittedSort={submittedSort} order={order}/>} />
         <Route
           path='/reviews/category/:category_name/*'
-          element={<Reviews submittedSort={submittedSort}/>}
+          element={<Reviews submittedSort={submittedSort} order={order}/>}
         />
         <Route path='/reviews/:review_id' element={<Review />} />
       </Routes>
