@@ -8,8 +8,7 @@ export const Review = () => {
   const { review_id } = useParams()
   const [review, setReview] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
-  const [buttonClicked, setButtonClicked] = useState(false)
-  const [buttonMessage, setButtonMessage] = useState(null)
+  const [buttonMessage, setButtonMessage] = useState({class:'', msg:''})
 
   useEffect(() => {
     setIsLoading(true)
@@ -38,22 +37,11 @@ export const Review = () => {
       <p>Comments: {review.comment_count}</p>
       <p>Votes: {review.votes} </p>
       <ReviewVoteButton
-        buttonClicked={buttonClicked}
-        setButtonClicked={setButtonClicked}
-        up={true}
         review_id={review_id}
         setReview={setReview}
         setButtonMessage = {setButtonMessage}
       />
-      <ReviewVoteButton
-        buttonClicked={buttonClicked}
-        setButtonClicked={setButtonClicked}
-        up={false}
-        review_id={review_id}
-        setReview={setReview}
-        setButtonMessage = {setButtonMessage}
-      />
-      {buttonMessage ? <p>{buttonMessage}</p> : ''}
+      {buttonMessage ? <p className={buttonMessage.class}>{buttonMessage.msg}</p> : ''}
       <Comments review_id={review_id}/>
     </section>
   )
