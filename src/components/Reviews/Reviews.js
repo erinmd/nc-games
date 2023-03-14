@@ -30,7 +30,7 @@ export const Reviews = () => {
   }, [category_name])
 
   return (
-    <section>
+    <section className='reviewsContainer'>
       {category_name ? (
         <h2 className='catHeader'>
           Category: {formatCategoryName(category_name)}

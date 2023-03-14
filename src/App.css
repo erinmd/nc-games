@@ -45,6 +45,10 @@ nav {
   color: #F0F0ED
 }
 
+.reviewsContainer {
+  width: 90%
+}
+
 .reviewsSection {
   display: flex;
   flex-wrap: wrap;
@@ -54,6 +58,7 @@ nav {
   padding: 0;
   margin: 0 auto;
 }
+
 
 .catHeader {
   text-align: center;
