@@ -16,6 +16,12 @@ export const getReview = reviewId => {
   })
 }
 
+export const updateReviewVote = (reviewId, inc_votes) => {
+    return gamesApi.patch(`/reviews/${reviewId}`, {inc_votes}).then(({data}) => {
+        return data.review
+    })
+}
+
 export const getComments = review_id => {
     return gamesApi.get(`/reviews/${review_id}/comments`).then(({ data }) => {
       return data.comments
