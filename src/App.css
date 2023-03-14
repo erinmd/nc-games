@@ -72,10 +72,18 @@ nav {
   margin: 5px 5px
 }
 
+.commentList {
+  margin: 0;
+  padding: 0;
+}
+
 .commentsSection {
+  color: #1B1B24;
   background-color: #7cb9a6;
   border-radius: 20px;
   padding:10px;
+  display: flex;
+  flex-direction: column;
 }
 
 .commentCard {
@@ -85,6 +93,33 @@ nav {
   border-radius: 10px;
   padding: 5px;
   margin: 15px;
-  box-shadow:0 0 10px 2px #F0F0ED
+  box-shadow:0 0 10px 2px #F0F0ED;
+  display:flex;
+  flex-direction: column;
+  color: #F0F0ED;
 
+}
+
+ .textBox{
+  background-color:#1B1B24;
+  height: 60px;
+  resize: none;
+  display: block;
+  color: #F0F0ED;
+  list-style: none;
+  text-align: left;
+  border: 0px;
+  border-radius: 5px;
+  margin: 5px;
+  flex-grow: 1;
+}
+
+.commentButton {
+  background-color: #008383;
+  color: #fffffc;
+  font-weight: 900
+}
+
+::placeholder {
+  color:  #f0f0edcf
 }
