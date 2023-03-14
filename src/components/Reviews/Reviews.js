@@ -1,27 +1,32 @@
 import { useEffect, useState } from 'react'
 import { getCategories, getReviews } from '../../utils/api'
 import { ReviewCard } from './ReviewCard'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { formatCategoryName } from '../../utils/utils'
 
-export const Reviews = () => {
+export const Reviews = ({ submittedSort }) => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const { category_name } = useParams()
   const [catDescription, setCatDescription] = useState('')
-  const [newCatLoading, setNewCatLoading] = useState(false)
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  useEffect(() => {
+    if (submittedSort !== 'Sort by') setSearchParams({ sort_by: submittedSort, order:'desc' })
+  }, [submittedSort, setSearchParams])
 
   useEffect(() => {
     setIsLoading(true)
-    getReviews(category_name).then(reviews => {
+    let sortByApi = submittedSort.toLowerCase()
+    if (submittedSort === 'Date') sortByApi = 'created_at'
+    if (submittedSort === 'Sort by') sortByApi = 'votes'
+    getReviews(category_name, sortByApi).then(reviews => {
       setReviews(reviews)
       setIsLoading(false)
-
     })
-  }, [category_name])
+  }, [category_name, submittedSort])
 
   useEffect(() => {
-    
     if (category_name) {
       getCategories().then(categories => {
         const newDescription = categories.find(category => {
@@ -43,7 +48,9 @@ export const Reviews = () => {
       )}
       {category_name ? (
         <p className='catDescription'> Description: {catDescription}</p>
-      ) : ''}
+      ) : (
+        ''
+      )}
       {isLoading ? (
         <p className='initialPageLoad'>Loading...</p>
       ) : (
