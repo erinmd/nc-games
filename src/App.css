@@ -73,6 +73,7 @@ nav {
 .radioButton {
   display: inline;
   margin-left: 10px;
+
 }
 
 .navAvatar {
@@ -245,15 +246,14 @@ nav {
 .navContainer{
   display: flex
 }
+.formFlex {
+  margin: 5px;
+}
 
 .catForm {
   display: flex;
 }
 
-.formFlex {
-  display: inline;
-  margin: 5px;
-}
 
 .radioButtons{
   text-align: right;
