@@ -103,7 +103,7 @@ nav {
 .reviewsSection {
   display: flex;
   flex-wrap: wrap;
-  width: 90%;
+  width: 95%;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -131,13 +131,17 @@ nav {
 
 .reviewCard {
   width: 280px;
-  height: 420px;
+  height: 480px;
   list-style: none;
   text-align: center;
-  padding: 10px;
   margin: 15px;
   border-radius: 20px;
   box-shadow: 0 0 15px 2px #596c79c8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .reviewCard:hover {
@@ -225,6 +229,8 @@ nav {
   color:  #f0f0edcf
 }
 
+
+
 @media only screen and (min-width:375px) {
   nav {
     height: 130px
@@ -262,3 +268,4 @@ nav {
 }
 
 }
+
