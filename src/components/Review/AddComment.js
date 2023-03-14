@@ -2,10 +2,11 @@ import { useContext, useState } from 'react'
 import { UserContext } from '../../contexts/User'
 import { postComment } from '../../utils/api'
 
-export const AddComment = ({ setComments, review_id }) => {
+export const AddComment = ({ setComments, review_id, setMessage }) => {
   const [newComment, setNewComment] = useState('')
   const [loadingComment, setLoadingComment] = useState(false)
   const { user } = useContext(UserContext)
+  
 
   const handleSubmit = event => {
     event.preventDefault()
@@ -17,6 +18,10 @@ export const AddComment = ({ setComments, review_id }) => {
         })
         setLoadingComment(false)
         setNewComment('')
+        setMessage({msg:'Your comment was posted successfully!', class:'success'})
+      })
+      .catch(()=>{
+        setMessage({msg:'Oops, something went wrong! Please try again', class:'error'})
       })
     }
   }

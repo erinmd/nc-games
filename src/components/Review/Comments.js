@@ -6,6 +6,7 @@ import { CommentCard } from './CommentCard'
 export const Comments = ({ review_id }) => {
   const [comments, setComments] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const [message, setMessage] = useState(null)
   useEffect(() => {
     setIsLoading(true)
     getComments(review_id).then(comments => {
@@ -16,7 +17,8 @@ export const Comments = ({ review_id }) => {
   return (
     <section className='commentsSection'>
       <h3>Comments</h3>
-      <AddComment setComments={setComments} review_id={review_id}/>
+      {message ? <p className={message.class}>{message.msg}</p> : ''}
+      <AddComment setMessage={setMessage} setComments={setComments} review_id={review_id}/>
       {isLoading ? (
         <p>Loading...</p>
       ) : comments.length > 0 ? (

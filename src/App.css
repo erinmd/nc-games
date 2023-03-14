@@ -67,6 +67,10 @@ nav {
   width: 75%;
 }
 
+.reviewBody {
+  text-align: justify
+}
+
 .reviewVoteButton {
   padding: 5px 10px;
   margin: 5px 5px
@@ -98,6 +102,15 @@ nav {
   flex-direction: column;
   color: #F0F0ED;
 
+}
+
+.error {
+  color: rgb(182, 9, 9);
+  font-weight: 900
+}
+
+.success {
+  font-style:italic
 }
 
  .textBox{
