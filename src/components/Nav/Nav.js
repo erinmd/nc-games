@@ -1,18 +1,26 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { UserContext } from '../contexts/User'
+import { UserContext } from '../../contexts/User'
+import { OrderBy } from './OrderBy'
 import { SelectCategory } from './SelectCategory'
+import { SortBy } from './SortBy'
 
-export const Nav = ({ currentCategory, setCurrentCategory }) => {
+export const Nav = ({setSubmittedSort, setOrder}) => {
+  const [currentCategory, setCurrentCategory] = useState('Select Category')
+  const [currentSort, setCurrentSort] = useState('Sort by')
+  const [currentOrder, setCurrentOrder] = useState('desc')
   const navigate = useNavigate()
   const { user } = useContext(UserContext)
+  let path = '/'
   const handleSubmit = e => {
     e.preventDefault()
+    setSubmittedSort(currentSort)
+    setOrder(currentOrder)
     if (currentCategory !== 'Select Category') {
-      if (currentCategory === 'All') navigate('/')
-      else {
-        navigate(`/reviews/category/${currentCategory}`)
+      if (currentCategory !== 'All') {
+        path = `/reviews/category/${currentCategory}`
       }
+      navigate(path)
     }
   }
 
@@ -23,7 +31,11 @@ export const Nav = ({ currentCategory, setCurrentCategory }) => {
           Home
         </Link>
         <form className='catForm' onSubmit={handleSubmit}>
+          <div className='formFlex'>
           <SelectCategory setCurrentCategory={setCurrentCategory} />
+          <SortBy setCurrentSort={setCurrentSort}/>
+          <OrderBy setCurrentOrder={setCurrentOrder}/>
+          </div>
           <button className='navButton'> Go </button>
         </form>
       </section>

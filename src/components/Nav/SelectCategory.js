@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { getCategories } from '../utils/api'
-import { formatCategoryName } from '../utils/utils'
+import { getCategories } from '../../utils/api'
+import { formatCategoryName } from '../../utils/utils'
 
 export const SelectCategory = ({ setCurrentCategory }) => {
   const [categoryList, setCategoryList] = useState([])
