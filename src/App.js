@@ -10,7 +10,7 @@ function App () {
   const [currentCategory, setCurrentCategory] = useState('Select Category')
   return (
     <main className='appContainer'>
-      <Nav currentCategory={currentCategory} setCurrentCategory={setCurrentCategory}/>
+      <Nav currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
       <Header />
       <Routes>
         <Route path='/' element={<Reviews />} />

@@ -55,7 +55,15 @@ nav {
   margin: 0 auto;
 }
 
+.catHeader {
+  text-align: center;
+  padding: 10px;
+}
 
+.catDescription {
+  text-align: center;
+  padding: 10px;
+}
 
 
 
