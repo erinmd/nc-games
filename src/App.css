@@ -1,3 +1,7 @@
+body {
+  background-color: #1B1B24;
+}
+
 .appContainer {
   background-color: #1B1B24;
   color: #F0F0ED;
@@ -5,8 +9,10 @@
   flex-direction: column;
   align-items: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+  height: 100%;
 }
+
+
 
 header {
   color: #009999;
@@ -16,16 +22,70 @@ header {
 
 nav {
   color: #F0F0ED;
-  background-color: #596c79c8;
+  background-color: #596c79;
   width: 100%;
-  height: 30px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
+.navContainer {
+  color: #F0F0ED;
+  background-color: #596c79;
+  width: 100%;
+  display: inline;
+  align-items: center;
+  justify-content:center;
+  gap: 20px;
+}
+
+.navButton {
+  background-color: #008383;
+  color: #fffffc;
+  font-weight: 900;
+  margin: 5px;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+
 .linkText {
-  color: #F0F0ED
+  color: #F0F0ED;
+  display: inline;
+  margin: 5px;
+  padding: 5px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.catForm {
+  display: inline;
+}
+
+.navAvatar {
+  height: 50px;
+  display: inline
+}
+
+
+.selectCategory {
+  background-color: #1B1B24;
+  color: #F0F0ED;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+
+
+.reviewsContainer {
+  width: 90%;
+  height: 100%;
+}
+
+.initialPageLoad {
+  text-align: center;
 }
 
 .reviewsSection {
@@ -34,7 +94,21 @@ nav {
   width: 90%;
   align-items: center;
   justify-content: center;
-  padding: 0
+  padding: 0;
+  margin: 0 auto;
+}
+
+
+.catHeader {
+  text-align: left;
+  padding: 5px;
+  margin-left: 5%
+}
+
+.catDescription {
+  text-align: left;
+  padding: 5px;
+  margin-left: 5%
 }
 
 
@@ -45,6 +119,7 @@ nav {
 
 .reviewCard {
   width: 280px;
+  height: 420px;
   list-style: none;
   text-align: center;
   padding: 10px;
@@ -59,7 +134,8 @@ nav {
 
 
 .reviewImage {
-  width: 240px;
+  max-width: 240px;
+  max-height: 160px;
 }
 
 .singleReview {

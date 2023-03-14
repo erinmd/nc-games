@@ -4,8 +4,8 @@ const gamesApi = axios.create({
   baseURL: 'https://nc-games-project-2obg.onrender.com/api'
 })
 
-export const getReviews = () => {
-  return gamesApi.get('/reviews').then(({ data }) => {
+export const getReviews = (category) => {
+  return gamesApi.get('/reviews', {params: {category}}).then(({ data }) => {
     return data.reviews
   })
 }
@@ -35,5 +35,11 @@ export const postComment = (reviewId, username, body) => {
     .post(`/reviews/${reviewId}/comments`, { username, body })
     .then(({ data }) => {
       return data.comment
+    })
+  }
+  
+export const getCategories = () => {
+    return gamesApi.get('/categories').then(({data}) => {
+        return data.categories
     })
 }
