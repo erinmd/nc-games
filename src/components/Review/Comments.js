@@ -12,7 +12,7 @@ export const Comments = ({ review_id }) => {
       console.log(comments)
       setIsLoading(false)
     })
-  }, [])
+  }, [review_id])
   return (
     <ol className='commentsSection'>
       <h3>Comments</h3>

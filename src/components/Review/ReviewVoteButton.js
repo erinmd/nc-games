@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { updateReviewVote } from '../../utils/api'
 
 export const ReviewVoteButton = ({

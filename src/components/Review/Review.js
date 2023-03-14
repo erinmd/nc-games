@@ -17,7 +17,7 @@ export const Review = () => {
       setReview(review)
       setIsLoading(false)
     })
-  }, [])
+  }, [review_id])
   return isLoading ? (
     <section className='singleReview'>
       <p>Loading...</p>
