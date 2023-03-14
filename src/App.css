@@ -248,11 +248,17 @@ nav {
 
 .catForm {
   display: flex;
-
 }
 
 .formFlex {
   display: inline;
+  margin: 5px;
+}
+
+.radioButtons{
+  text-align: right;
+  display: inline;
+  margin: 5px;
 }
 
 }
