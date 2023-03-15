@@ -12,7 +12,7 @@ export const getReviews = (category, sort_by, order_by, p) => {
 
 export const getReview = reviewId => {
   return gamesApi.get(`/reviews/${reviewId}`).then(({ data }) => {
-    return data.review
+    return data.review 
   })
 }
 

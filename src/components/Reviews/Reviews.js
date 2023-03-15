@@ -52,7 +52,8 @@ export const Reviews = ({ searchParams }) => {
           setReviews(currReviews => {
             const newReviews = [...currReviews, ...returnedReviews]
             setIsLoading(false)
-            if (newReviews.length > totalReviews) {
+            if (newReviews.length >= totalReviews) {
+          
               setHasMore(false)
             }
             return newReviews
