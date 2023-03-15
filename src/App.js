@@ -1,5 +1,6 @@
 import { Route, Routes, useSearchParams } from 'react-router-dom'
 import './App.css'
+import { ErrorPage } from './components/ErrorPage'
 import { Header } from './components/Header'
 import { Nav } from './components/Nav/Nav'
 import { Review } from './components/Review/Review'
@@ -9,11 +10,11 @@ function App () {
   const [searchParams] = useSearchParams()
   return (
     <main className='appContainer'>
-      <Nav 
-      />
+      <Nav />
       <Header />
       <Routes>
-        <Route path='/*' element={<Reviews searchParams={searchParams}/>} />
+        <Route path='*' element={<ErrorPage />} />
+        <Route path='/' element={<Reviews searchParams={searchParams} />} />
         <Route path='/reviews/:review_id' element={<Review />} />
       </Routes>
     </main>
