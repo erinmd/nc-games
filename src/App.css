@@ -1,3 +1,5 @@
+/* App */
+
 body {
   background-color: #1B1B24;
 }
@@ -12,13 +14,13 @@ body {
   height: 100%;
 }
 
-
-
 header {
   color: #009999;
   font-size: 50px;
   margin-top: 10px;
 }
+
+/* Nav bar */
 
 nav {
   color: #F0F0ED;
@@ -90,6 +92,7 @@ nav {
 }
 
 
+/* Reviews */
 
 .reviewsContainer {
   width: 90%;
@@ -153,6 +156,8 @@ nav {
   max-width: 240px;
   max-height: 160px;
 }
+
+/* Individual review page */
 
 .singleReview {
   text-align: center;
@@ -248,6 +253,7 @@ nav {
   color:  #f0f0edcf
 }
 
+/* Media queries */
 
 
 @media only screen and (min-width:375px) {
