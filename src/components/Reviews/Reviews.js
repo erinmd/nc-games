@@ -50,7 +50,13 @@ export const Reviews = ({ searchParams }) => {
         page
       )
         .then(returnedReviews => {
-          setReviews(currReviews => [...currReviews, ...returnedReviews])
+          setReviews(currReviews => {
+            const reviewsToAdd = returnedReviews.filter(returnedReview => {
+              return currReviews.every(currReview => {
+                return currReview.review_id !== returnedReview.review_id
+              })
+            })
+            return [...currReviews, ...reviewsToAdd]})
           setIsLoading(false)
           if (reviews.length > totalReviews - 10) {
             setHasMore(false)
