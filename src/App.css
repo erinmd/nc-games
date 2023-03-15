@@ -193,7 +193,26 @@ nav {
   display:flex;
   flex-direction: column;
   color: #F0F0ED;
+}
 
+.removeSection {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.removeButton {
+  background-color: #596c79;
+  color: #fffffc;
+  width:150px;
+  display:inline-block;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.deleteError {
+  display: inline-block;
+  margin: 5px;
 }
 
 .error {
