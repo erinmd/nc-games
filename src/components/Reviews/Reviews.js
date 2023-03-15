@@ -51,16 +51,13 @@ export const Reviews = ({ searchParams }) => {
       )
         .then(returnedReviews => {
           setReviews(currReviews => {
-            const reviewsToAdd = returnedReviews.filter(returnedReview => {
-              return currReviews.every(currReview => {
-                return currReview.review_id !== returnedReview.review_id
-              })
-            })
-            return [...currReviews, ...reviewsToAdd]})
-          setIsLoading(false)
-          if (reviews.length > totalReviews - 10) {
-            setHasMore(false)
-          }
+            const newReviews = [...currReviews, ...returnedReviews]
+            setIsLoading(false)
+            if (newReviews.length > totalReviews - 10) {
+              setHasMore(false)
+            }
+            return newReviews
+          })
         })
         .catch(err => {
           setIsLoading(false)
@@ -68,7 +65,7 @@ export const Reviews = ({ searchParams }) => {
           setErrorMessage(err.response.data.msg)
         })
     }
-  }, [page, hasMore])
+  }, [page, hasMore, searchParams, totalReviews])
 
   useEffect(() => {
     if (category_name) {
