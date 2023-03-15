@@ -9,7 +9,7 @@ export const DeleteComment = ({ commentId, setErrorMessage,setDeleteSuccessful }
       
       setDeleteSuccessful(true)
     }).catch(()=>{
-        setErrorMessage({err:true, msg:'Something went wrong, try again!'})
+        setErrorMessage('Something went wrong, try again!')
         setButtonText('Remove Comment')
     })
   }
