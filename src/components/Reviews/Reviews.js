@@ -41,7 +41,6 @@ export const Reviews = ({ searchParams }) => {
 
   useEffect(() => {
     if (hasMore && page > 1) {
-      console.log(page)
       setIsLoading(true)
       getReviews(
         searchParams.get('category'),
@@ -53,7 +52,7 @@ export const Reviews = ({ searchParams }) => {
           setReviews(currReviews => {
             const newReviews = [...currReviews, ...returnedReviews]
             setIsLoading(false)
-            if (newReviews.length > totalReviews - 10) {
+            if (newReviews.length > totalReviews) {
               setHasMore(false)
             }
             return newReviews
