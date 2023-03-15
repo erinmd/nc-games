@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getReview } from '../../utils/api'
 import { ReviewVoteButton } from './ReviewVoteButton'
 import {useParams} from 'react-router-dom'
-import { Comments } from "./Comments"
+import { Comments } from "./Comments/Comments"
 
 export const Review = () => {
   const { review_id } = useParams()

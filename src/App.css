@@ -193,7 +193,15 @@ nav {
   display:flex;
   flex-direction: column;
   color: #F0F0ED;
+}
 
+.removeButton {
+  background-color: #596c79;
+  color: #fffffc;
+  width:150px;
+  align-self: flex-end;
+  border-radius: 10px;
+  
 }
 
 .error {
