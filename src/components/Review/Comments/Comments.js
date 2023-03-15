@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getComments } from '../../utils/api'
+import { getComments } from '../../../utils/api'
 import { AddComment } from './AddComment'
 import { CommentCard } from './CommentCard'
 
@@ -23,7 +23,7 @@ export const Comments = ({ review_id }) => {
         <p>Loading...</p>
       ) : comments.length > 0 ? (
         <ol className='commentList'> {comments.map(comment => {
-          return <CommentCard key={comment.created_at} comment={comment} />
+          return <CommentCard key={comment.created_at} comment={comment} setComments={setComments}/>
         })}
       </ol>) : (
         <p>No comments</p>
