@@ -1,31 +1,27 @@
 import { useEffect, useState } from 'react'
 import { getCategories, getReviews } from '../../utils/api'
 import { ReviewCard } from './ReviewCard'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { formatCategoryName } from '../../utils/utils'
 
-export const Reviews = ({ submittedSort, order }) => {
+export const Reviews = ({ searchParams }) => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const { category_name } = useParams()
   const [catDescription, setCatDescription] = useState('')
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [errorMessage, setErrorMessage] = useState(null)
+
 
   useEffect(() => {
-    if (submittedSort !== 'Sort by') setSearchParams({ sort_by: submittedSort, order})
-  }, [submittedSort, setSearchParams, order])
-
-  useEffect(() => {
+    setErrorMessage(null)
     setIsLoading(true)
-    let sortByApi = submittedSort.toLowerCase()
-    if (submittedSort === 'Date') sortByApi = 'created_at'
-    else if (submittedSort === 'Sort by') sortByApi = 'votes'
-    else if (submittedSort === 'Comments') sortByApi = 'comment_count'
-    getReviews(category_name, sortByApi, order).then(reviews => {
+    getReviews(searchParams.get('category'), searchParams.get('sort_by'), searchParams.get('order')).then(reviews => {
       setReviews(reviews)
       setIsLoading(false)
-    })
-  }, [category_name, submittedSort, order])
+    }).catch(err=> {
+      setIsLoading(false)
+      setErrorMessage(err.response.data.msg)})
+  }, [category_name, searchParams])
 
   useEffect(() => {
     if (category_name) {
@@ -40,9 +36,10 @@ export const Reviews = ({ submittedSort, order }) => {
 
   return (
     <section className='reviewsContainer'>
-      {category_name ? (
+      {errorMessage ? <p className='error'>{`${errorMessage}. Please use the drop down boxes!`}</p> : ''}
+      {searchParams.get('category') ? (
         <h2 className='catHeader'>
-          Category: {formatCategoryName(category_name)}
+          Category: {formatCategoryName(searchParams.get('category'))}
         </h2>
       ) : (
         <h2 className='catHeader'>All Games</h2>
@@ -56,9 +53,10 @@ export const Reviews = ({ submittedSort, order }) => {
         <p className='initialPageLoad'>Loading...</p>
       ) : (
         <ol className='reviewsSection'>
-          {reviews.map(review => {
+          {reviews.length > 0 ? reviews.map(review => {
             return <ReviewCard key={review.review_id} review={review} />
-          })}
+          })
+          : <p>No reviews found</p> }
         </ol>
       )}
     </section>
