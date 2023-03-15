@@ -3,6 +3,7 @@ import { getCategories, getReviews } from '../../utils/api'
 import { ReviewCard } from './ReviewCard'
 import { useParams } from 'react-router-dom'
 import { formatCategoryName } from '../../utils/utils'
+import { ErrorPage } from '../ErrorPage'
 
 export const Reviews = ({ searchParams }) => {
   const [reviews, setReviews] = useState([])
@@ -20,7 +21,7 @@ export const Reviews = ({ searchParams }) => {
       setIsLoading(false)
     }).catch(err=> {
       setIsLoading(false)
-      setErrorMessage(err.response.data.msg)})
+      setErrorMessage(`${err.response.data.msg}. Please use the navigation bar!`)})
   }, [category_name, searchParams])
 
   useEffect(() => {
@@ -34,9 +35,10 @@ export const Reviews = ({ searchParams }) => {
     }
   }, [category_name])
 
-  return (
+  return ( errorMessage ? (
+      <ErrorPage error={errorMessage} />
+    ) :
     <section className='reviewsContainer'>
-      {errorMessage ? <p className='error'>{`${errorMessage}. Please use the drop down boxes!`}</p> : ''}
       {searchParams.get('category') ? (
         <h2 className='catHeader'>
           Category: {formatCategoryName(searchParams.get('category'))}
