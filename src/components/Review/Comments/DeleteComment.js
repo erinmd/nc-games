@@ -1,18 +1,15 @@
 import { useState } from 'react'
 import { deleteComment } from '../../../utils/api'
 
-export const DeleteComment = ({ commentId, setComments, setErrorMessage }) => {
+export const DeleteComment = ({ commentId, setErrorMessage,setDeleteSuccessful }) => {
   const [buttonText, setButtonText] = useState('Remove Comment')
   const removeCommentHandler = () => {
     setButtonText('Removing...')
     deleteComment(commentId).then(() => {
-      setComments(currComments => {
-        return currComments.filter(comment => {
-          return comment.comment_id !== commentId
-        })
-      })
+      
+      setDeleteSuccessful(true)
     }).catch(()=>{
-        setErrorMessage('Something went wrong, try again!')
+        setErrorMessage({err:true, msg:'Something went wrong, try again!'})
         setButtonText('Remove Comment')
     })
   }
