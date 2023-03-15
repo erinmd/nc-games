@@ -3,21 +3,31 @@ import { getReview } from '../../utils/api'
 import { ReviewVoteButton } from './ReviewVoteButton'
 import {useParams} from 'react-router-dom'
 import { Comments } from "./Comments"
+import { ErrorPage } from '../ErrorPage'
 
 export const Review = () => {
   const { review_id } = useParams()
   const [review, setReview] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [buttonMessage, setButtonMessage] = useState({class:'', msg:''})
+  const [pathError, setPathError] = useState(null)
 
   useEffect(() => {
     setIsLoading(true)
     getReview(review_id).then(review => {
       setReview(review)
       setIsLoading(false)
+    }).catch(err => {
+      if (err.response.status===400){
+        setPathError('Please use a number to search for a review!')
+      } else if (err.response.status===404) {
+        setPathError('This review does not exist! Use the navigation bar to find what you need.')
+      } else {
+        setPathError('Oops something went wrong!')
+      }
     })
   }, [review_id])
-  return isLoading ? (
+  return pathError ? <ErrorPage error={pathError}/> : isLoading ? (
     <section className='singleReview'>
       <p>Loading...</p>
     </section>
