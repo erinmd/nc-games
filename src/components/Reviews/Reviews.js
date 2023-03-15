@@ -53,7 +53,6 @@ export const Reviews = ({ searchParams }) => {
             const newReviews = [...currReviews, ...returnedReviews]
             setIsLoading(false)
             if (newReviews.length >= totalReviews) {
-          
               setHasMore(false)
             }
             return newReviews
@@ -61,7 +60,6 @@ export const Reviews = ({ searchParams }) => {
         })
         .catch(err => {
           setIsLoading(false)
-          console.log(err)
           setErrorMessage(err.response.data.msg)
         })
     }
