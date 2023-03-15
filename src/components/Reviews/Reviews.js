@@ -9,18 +9,60 @@ export const Reviews = ({ searchParams }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [catDescription, setCatDescription] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
-
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
+  const [totalReviews, setTotalReviews] = useState(null)
 
   useEffect(() => {
+    setPage(1)
+    setHasMore(true)
     setErrorMessage(null)
     setIsLoading(true)
-    getReviews(searchParams.get('category'), searchParams.get('sort_by'), searchParams.get('order')).then(reviews => {
-      setReviews(reviews)
-      setIsLoading(false)
-    }).catch(err=> {
-      setIsLoading(false)
-      setErrorMessage(`${err.response.data.msg}. Please use the navigation bar!`)})
-  }, [searchParams])
+    getReviews(
+      searchParams.get('category'),
+      searchParams.get('sort_by'),
+      searchParams.get('order'),
+      1
+    )
+      .then(returnedReviews => {
+        setTotalReviews(returnedReviews[0].total_count)
+        setReviews(returnedReviews)
+        setIsLoading(false)
+        if (returnedReviews.length > totalReviews - 10) {
+          setHasMore(false)
+        }
+      })
+      .catch(err => {
+        setIsLoading(false)
+        setErrorMessage(`${err.response.data.msg}. Please use the navigation bar!`)})
+      })
+  }, [category_name, searchParams, totalReviews])
+
+  useEffect(() => {
+    if (hasMore && page > 1) {
+      setIsLoading(true)
+      getReviews(
+        searchParams.get('category'),
+        searchParams.get('sort_by'),
+        searchParams.get('order'),
+        page
+      )
+        .then(returnedReviews => {
+          setReviews(currReviews => {
+            const newReviews = [...currReviews, ...returnedReviews]
+            setIsLoading(false)
+            if (newReviews.length >= totalReviews) {
+              setHasMore(false)
+            }
+            return newReviews
+          })
+        })
+        .catch(err => {
+          setIsLoading(false)
+          setErrorMessage(`${err.response.data.msg}. Please use the navigation bar!`)})
+        })
+    }
+  }, [page, hasMore, searchParams, totalReviews])
 
   useEffect(() => {
     if (searchParams.get('category')) {
@@ -36,6 +78,22 @@ export const Reviews = ({ searchParams }) => {
       })
     }
   }, [searchParams])
+
+
+  useEffect(() => {
+    function handleScroll () {
+      const scrollTop = document.documentElement.scrollTop
+      const scrollHeight = document.documentElement.scrollHeight
+      const clientHeight = document.documentElement.clientHeight
+      if (scrollTop + clientHeight >= scrollHeight && hasMore) {
+        setPage(page + 1)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [reviews, page, hasMore])
 
   return ( errorMessage ? (
       <ErrorPage error={errorMessage} />
@@ -53,15 +111,19 @@ export const Reviews = ({ searchParams }) => {
       ) : (
         ''
       )}
+      <ol className='reviewsSection'>
+        {reviews.map(review => {
+          return <ReviewCard key={review.review_id} review={review} />
+        })}
+      </ol>
       {isLoading ? (
         <p className='initialPageLoad'>Loading...</p>
+      ) : reviews.length === 0 ? (
+        <p className='initialPageLoad'>No reviews found</p>
+      ) : !hasMore ? (
+        <p className='initialPageLoad'>End of reviews</p>
       ) : (
-        <ol className='reviewsSection'>
-          {reviews.length > 0 ? reviews.map(review => {
-            return <ReviewCard key={review.review_id} review={review} />
-          })
-          : <p>No reviews found</p> }
-        </ol>
+        ''
       )}
     </section>
   )
