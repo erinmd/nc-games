@@ -18,6 +18,7 @@ export const Reviews = ({ searchParams }) => {
     setHasMore(true)
     setErrorMessage(null)
     setIsLoading(true)
+
     getReviews(
       searchParams.get('category'),
       searchParams.get('sort_by'),
@@ -34,9 +35,17 @@ export const Reviews = ({ searchParams }) => {
       })
       .catch(err => {
         setIsLoading(false)
-        setErrorMessage(`${err.response.data.msg}. Please use the navigation bar!`)})
+        if (err.response) {
+          setErrorMessage(
+            `${err.response.data.msg}. Please use the navigation bar!`
+          )
+        } else {
+          setErrorMessage(
+            'Something went wrong! Please use the navigation bar to find what you need.'
+          )
+        }
       })
-  }, [category_name, searchParams, totalReviews])
+  }, [searchParams, totalReviews])
 
   useEffect(() => {
     if (hasMore && page > 1) {
@@ -59,7 +68,9 @@ export const Reviews = ({ searchParams }) => {
         })
         .catch(err => {
           setIsLoading(false)
-          setErrorMessage(`${err.response.data.msg}. Please use the navigation bar!`)})
+          setErrorMessage(
+            `${err.response.data.msg}. Please use the navigation bar!`
+          )
         })
     }
   }, [page, hasMore, searchParams, totalReviews])
@@ -71,14 +82,15 @@ export const Reviews = ({ searchParams }) => {
           return category.slug === searchParams.get('category')
         })
         if (currentCategory) {
-        setCatDescription(currentCategory.description)
+          setCatDescription(currentCategory.description)
         } else {
-          setErrorMessage('Category doesn\'t exist, please use the navigation bar!')
+          setErrorMessage(
+            "Category doesn't exist, please use the navigation bar!"
+          )
         }
       })
     }
   }, [searchParams])
-
 
   useEffect(() => {
     function handleScroll () {
@@ -95,9 +107,9 @@ export const Reviews = ({ searchParams }) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [reviews, page, hasMore])
 
-  return ( errorMessage ? (
-      <ErrorPage error={errorMessage} />
-    ) :
+  return errorMessage ? (
+    <ErrorPage error={errorMessage} />
+  ) : (
     <section className='reviewsContainer'>
       {searchParams.get('category') ? (
         <h2 className='catHeader'>
