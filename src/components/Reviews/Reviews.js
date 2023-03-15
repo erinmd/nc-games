@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 import { getCategories, getReviews } from '../../utils/api'
 import { ReviewCard } from './ReviewCard'
-import { useParams } from 'react-router-dom'
 import { formatCategoryName } from '../../utils/utils'
 import { ErrorPage } from '../ErrorPage'
 
 export const Reviews = ({ searchParams }) => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const { category_name } = useParams()
   const [catDescription, setCatDescription] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
 
@@ -22,18 +20,22 @@ export const Reviews = ({ searchParams }) => {
     }).catch(err=> {
       setIsLoading(false)
       setErrorMessage(`${err.response.data.msg}. Please use the navigation bar!`)})
-  }, [category_name, searchParams])
+  }, [searchParams])
 
   useEffect(() => {
-    if (category_name) {
+    if (searchParams.get('category')) {
       getCategories().then(categories => {
-        const newDescription = categories.find(category => {
-          return category.slug === category_name
-        }).description
-        setCatDescription(newDescription)
+        const currentCategory = categories.find(category => {
+          return category.slug === searchParams.get('category')
+        })
+        if (currentCategory) {
+        setCatDescription(currentCategory.description)
+        } else {
+          setErrorMessage('Category doesn\'t exist, please use the navigation bar!')
+        }
       })
     }
-  }, [category_name])
+  }, [searchParams])
 
   return ( errorMessage ? (
       <ErrorPage error={errorMessage} />
@@ -46,7 +48,7 @@ export const Reviews = ({ searchParams }) => {
       ) : (
         <h2 className='catHeader'>All Games</h2>
       )}
-      {category_name ? (
+      {searchParams.get('category') ? (
         <p className='catDescription'> Description: {catDescription}</p>
       ) : (
         ''
