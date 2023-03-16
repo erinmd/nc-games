@@ -28,6 +28,10 @@ button {
   margin: 5px;
 }
 
+button:disabled {
+  background-color: #596c79;
+}
+
 /* Nav bar */
 
 nav {

@@ -57,7 +57,6 @@ export const deleteComment = commentId => {
 }
 
 export const postReview = review => {
-  console.log(review)
   return gamesApi
     .post('/reviews', {
       owner: review.owner,
@@ -70,4 +69,8 @@ export const postReview = review => {
     .then(({ data }) => {
       return data.review
     })
+}
+
+export const deleteReview = reviewId => {
+  return gamesApi.delete(`/reviews/${reviewId}`)
 }

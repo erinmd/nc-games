@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { getReview } from '../../utils/api'
 import { ReviewVoteButton } from './ReviewVoteButton'
 import { useParams } from 'react-router-dom'
 import { Comments } from './Comments/Comments'
 import { ErrorPage } from '../ErrorPage'
+import { RemoveReview } from './RemoveReview'
+import { UserContext } from '../../contexts/User'
 
 export const Review = () => {
   const { review_id } = useParams()
@@ -11,6 +13,8 @@ export const Review = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [buttonMessage, setButtonMessage] = useState({ class: '', msg: '' })
   const [pathError, setPathError] = useState(null)
+  const [showRemoveButton, setShowRemoveButton] = useState(false)
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     setIsLoading(true)
@@ -18,6 +22,11 @@ export const Review = () => {
       .then(review => {
         setReview(review)
         setIsLoading(false)
+        const removeAllowed =
+          user.username === review.owner &&
+          review.comment_count === 0 &&
+          review.votes === 0
+        setShowRemoveButton(removeAllowed)
       })
       .catch(err => {
         if (err.response.status === 400) {
@@ -30,7 +39,7 @@ export const Review = () => {
           setPathError('Oops something went wrong!')
         }
       })
-  }, [review_id])
+  }, [review_id, user.username])
   return pathError ? (
     <ErrorPage error={pathError} />
   ) : isLoading ? (
@@ -46,7 +55,8 @@ export const Review = () => {
         src={review.review_img_url}
         alt={review.title}
       />
-      <p className='reviewBody'>Review: {review.review_body}</p>
+      <p>Review:</p>
+      <p>{review.review_body}</p>
       <p>Category: {review.category}</p>
       <p>Owner: {review.owner}</p>
       <p>Created at: {new Date(review.created_at).toDateString()}</p>
@@ -62,6 +72,7 @@ export const Review = () => {
       ) : (
         ''
       )}
+      {showRemoveButton ? <RemoveReview reviewId={review_id} /> : ''}
       <Comments review_id={review_id} />
     </section>
   )
