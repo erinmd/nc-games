@@ -319,6 +319,12 @@ nav {
   border-radius: 8px;
   border: solid 5px #009999
 }
+
+.selectedUser {
+  box-shadow: 0 0 15px 2px #008383;
+}
+
+
 /* Media queries */
 
 
