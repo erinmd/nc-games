@@ -103,6 +103,10 @@ nav {
   text-align: center;
 }
 
+.blank {
+  height: 18px;
+}
+
 .reviewsSection {
   display: flex;
   flex-wrap: wrap;
