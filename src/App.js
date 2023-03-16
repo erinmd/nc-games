@@ -4,6 +4,7 @@ import { Header } from './components/Header'
 import { Nav } from './components/Nav/Nav'
 import { Review } from './components/Review/Review'
 import { Reviews } from './components/Reviews/Reviews'
+import { Users } from './components/Users/Users'
 
 function App () {
   const [searchParams] = useSearchParams()
@@ -15,6 +16,7 @@ function App () {
       <Routes>
         <Route path='/*' element={<Reviews searchParams={searchParams}/>} />
         <Route path='/reviews/:review_id' element={<Review />} />
+        <Route path='/users' element={<Users />} />
       </Routes>
     </main>
   )
