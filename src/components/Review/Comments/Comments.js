@@ -26,7 +26,7 @@ export const Comments = ({ review_id }) => {
         <p>Loading...</p>
       ) : comments.length > 0 ? (
         <ol className='commentList'> {comments.map(comment => {
-          return <CommentCard key={comment.created_at} comment={comment} setComments={setComments}/>
+          return <CommentCard key={comment.comment_id} comment={comment} setComments={setComments}/>
         })}
       </ol>) : (
         <p>No comments</p>

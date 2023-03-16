@@ -103,6 +103,10 @@ nav {
   text-align: center;
 }
 
+.blank {
+  height: 18px;
+}
+
 .reviewsSection {
   display: flex;
   flex-wrap: wrap;
@@ -222,7 +226,7 @@ nav {
 
 .error {
   color: rgb(182, 9, 9);
-  font-weight: 900
+  font-weight: 900;
 }
 
 .success {

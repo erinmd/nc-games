@@ -4,30 +4,34 @@ import { postComment } from '../../../utils/api'
 
 export const AddComment = ({ setComments, review_id, setMessage }) => {
   const [newComment, setNewComment] = useState('')
-  const [loadingComment, setLoadingComment] = useState(false)
   const { user } = useContext(UserContext)
-  
 
   const handleSubmit = event => {
     event.preventDefault()
     if (newComment.length > 0) {
-      setLoadingComment(true)
-      postComment(review_id, user.username, newComment).then(comment => {
-        setComments(currComments => {
-          return [comment, ...currComments]
+      setMessage({ msg: 'Loading your comment...', class: 'loading' })
+      postComment(review_id, user.username, newComment)
+        .then(comment => {
+          setComments(currComments => {
+            return [comment, ...currComments]
+          })
+          setNewComment('')
+          setMessage({
+            msg: 'Your comment was posted successfully!',
+            class: 'success'
+          })
         })
-        setLoadingComment(false)
-        setNewComment('')
-        setMessage({msg:'Your comment was posted successfully!', class:'success'})
-      })
-      .catch(()=>{
-        setMessage({msg:'Oops, something went wrong! Please try again', class:'error'})
-      })
+        .catch(() => {
+          setMessage({
+            msg: 'Oops, something went wrong! Please try again',
+            class: 'error'
+          })
+        })
+    } else {
+      setMessage({ msg: 'You must enter a comment first!', class: 'error' })
     }
   }
-  return loadingComment ? (
-    <p>Loading your comment...</p>
-  ) : (
+  return (
     <form className='commentCard' onSubmit={handleSubmit}>
       <textarea
         placeholder='Type your comment here...'

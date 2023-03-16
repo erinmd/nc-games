@@ -1,24 +1,30 @@
 import { useEffect, useState } from 'react'
 import { getCategories, getReviews } from '../../utils/api'
 import { ReviewCard } from './ReviewCard'
-import { useParams } from 'react-router-dom'
 import { formatCategoryName } from '../../utils/utils'
+import { ErrorPage } from '../ErrorPage'
+import { useSearchParams } from 'react-router-dom'
 
-export const Reviews = ({ searchParams }) => {
+export const Reviews = () => {
   const [reviews, setReviews] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
-  const { category_name } = useParams()
-  const [catDescription, setCatDescription] = useState('')
+  const [isLoading, setIsLoading] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
   const [page, setPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   const [totalReviews, setTotalReviews] = useState(null)
+  const [currentCat, setCurrentCat] = useState({
+    desc: 'Loading...',
+    name: 'Loading'
+  })
+  const [noReviewsMsg, setNoReviewsMsg] = useState(null)
+  const [searchParams] = useSearchParams()
 
   useEffect(() => {
     setPage(1)
     setHasMore(true)
     setErrorMessage(null)
     setIsLoading(true)
+    setNoReviewsMsg(null)
     getReviews(
       searchParams.get('category'),
       searchParams.get('sort_by'),
@@ -29,15 +35,20 @@ export const Reviews = ({ searchParams }) => {
         setTotalReviews(returnedReviews[0].total_count)
         setReviews(returnedReviews)
         setIsLoading(false)
+        if (returnedReviews.length === 0) setNoReviewsMsg('No reviews found.')
         if (returnedReviews.length > totalReviews - 10) {
           setHasMore(false)
         }
       })
       .catch(err => {
         setIsLoading(false)
-        setErrorMessage(err.response.data.msg)
+        if (err.response) {
+          setErrorMessage(
+            `${err.response.data.msg}. Please use the navigation bar!`
+          )
+        }
       })
-  }, [category_name, searchParams, totalReviews])
+  }, [searchParams, totalReviews])
 
   useEffect(() => {
     if (hasMore && page > 1) {
@@ -60,21 +71,34 @@ export const Reviews = ({ searchParams }) => {
         })
         .catch(err => {
           setIsLoading(false)
-          setErrorMessage(err.response.data.msg)
+          if (err.response) {
+            setErrorMessage(
+              `${err.response.data.msg}. Please use the navigation bar!`
+            )
+          }
         })
     }
   }, [page, hasMore, searchParams, totalReviews])
 
   useEffect(() => {
-    if (category_name) {
+    if (searchParams.get('category')) {
       getCategories().then(categories => {
-        const newDescription = categories.find(category => {
-          return category.slug === category_name
-        }).description
-        setCatDescription(newDescription)
+        const currentCategory = categories.find(category => {
+          return category.slug === searchParams.get('category')
+        })
+        if (currentCategory) {
+          setCurrentCat({
+            desc: currentCategory.description,
+            name: formatCategoryName(searchParams.get('category'))
+          })
+        } else {
+          setErrorMessage(
+            "Category doesn't exist, please use the navigation bar!"
+          )
+        }
       })
     }
-  }, [category_name])
+  }, [searchParams])
 
   useEffect(() => {
     function handleScroll () {
@@ -91,34 +115,35 @@ export const Reviews = ({ searchParams }) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [reviews, page, hasMore])
 
-  return (
+  return errorMessage ? (
+    <ErrorPage error={errorMessage} />
+  ) : (
     <section className='reviewsContainer'>
-      {errorMessage ? (
-        <p className='error'>{`${errorMessage}. Please use the drop down boxes!`}</p>
-      ) : (
-        ''
-      )}
       {searchParams.get('category') ? (
-        <h2 className='catHeader'>
-          Category: {formatCategoryName(searchParams.get('category'))}
-        </h2>
+        <h2 className='catHeader'>Category: {currentCat.name}</h2>
       ) : (
         <h2 className='catHeader'>All Games</h2>
       )}
-      {category_name ? (
-        <p className='catDescription'> Description: {catDescription}</p>
+      {searchParams.get('category') ? (
+        <p className='catDescription'> Description: {currentCat.desc}</p>
       ) : (
         ''
+      )}
+      {isLoading && page === 1 ? (
+        <p className='initialPageLoad'>Loading...</p>
+      ) : (
+        <p className='blank'></p>
       )}
       <ol className='reviewsSection'>
         {reviews.map(review => {
           return <ReviewCard key={review.review_id} review={review} />
         })}
       </ol>
-      {isLoading ? (
+
+      {isLoading && page > 1 ? (
         <p className='initialPageLoad'>Loading...</p>
-      ) : reviews.length === 0 ? (
-        <p className='initialPageLoad'>No reviews found</p>
+      ) : noReviewsMsg ? (
+        <p className='initialPageLoad'>{noReviewsMsg}</p>
       ) : !hasMore ? (
         <p className='initialPageLoad'>End of reviews</p>
       ) : (
