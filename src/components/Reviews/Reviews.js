@@ -7,11 +7,12 @@ import { ErrorPage } from '../ErrorPage'
 export const Reviews = ({ searchParams }) => {
   const [reviews, setReviews] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const [catDescription, setCatDescription] = useState('')
+  const [catDescription, setCatDescription] = useState('Loading...')
   const [errorMessage, setErrorMessage] = useState(null)
   const [page, setPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   const [totalReviews, setTotalReviews] = useState(null)
+  const [currentCat, setCurrentCat] = useState('Loading...')
 
   useEffect(() => {
     setPage(1)
@@ -39,10 +40,6 @@ export const Reviews = ({ searchParams }) => {
           setErrorMessage(
             `${err.response.data.msg}. Please use the navigation bar!`
           )
-        } else {
-          setErrorMessage(
-            'Something went wrong! Please use the navigation bar to find what you need.'
-          )
         }
       })
   }, [searchParams, totalReviews])
@@ -68,9 +65,11 @@ export const Reviews = ({ searchParams }) => {
         })
         .catch(err => {
           setIsLoading(false)
-          setErrorMessage(
-            `${err.response.data.msg}. Please use the navigation bar!`
-          )
+          if (err.response) {
+            setErrorMessage(
+              `${err.response.data.msg}. Please use the navigation bar!`
+            )
+          }
         })
     }
   }, [page, hasMore, searchParams, totalReviews])
@@ -83,6 +82,7 @@ export const Reviews = ({ searchParams }) => {
         })
         if (currentCategory) {
           setCatDescription(currentCategory.description)
+          setCurrentCat(formatCategoryName(searchParams.get('category')))
         } else {
           setErrorMessage(
             "Category doesn't exist, please use the navigation bar!"
@@ -112,9 +112,7 @@ export const Reviews = ({ searchParams }) => {
   ) : (
     <section className='reviewsContainer'>
       {searchParams.get('category') ? (
-        <h2 className='catHeader'>
-          Category: {formatCategoryName(searchParams.get('category'))}
-        </h2>
+        <h2 className='catHeader'>Category: {currentCat}</h2>
       ) : (
         <h2 className='catHeader'>All Games</h2>
       )}
@@ -123,12 +121,18 @@ export const Reviews = ({ searchParams }) => {
       ) : (
         ''
       )}
+      {isLoading && page === 1 ? (
+        <p className='initialPageLoad'>Loading...</p>
+      ) : (
+        ''
+      )}
       <ol className='reviewsSection'>
         {reviews.map(review => {
           return <ReviewCard key={review.review_id} review={review} />
         })}
       </ol>
-      {isLoading ? (
+
+      {isLoading && page > 1 ? (
         <p className='initialPageLoad'>Loading...</p>
       ) : reviews.length === 0 ? (
         <p className='initialPageLoad'>No reviews found</p>
