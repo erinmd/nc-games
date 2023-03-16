@@ -238,6 +238,25 @@ nav {
   color:  #f0f0edcf
 }
 
+/* User profile */
+
+.userCard {
+  box-shadow: 0 0 15px 2px #596c79c8;
+  display: flex;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.userProfileText {
+  display: inline-block;
+  margin: 10px 20px;
+}
+
+.userProfileAvatar {
+  height: 150px;
+  display: inline-block;
+  margin: 10px 20px;
+}
 
 
 @media only screen and (min-width:375px) {
