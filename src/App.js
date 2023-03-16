@@ -4,6 +4,7 @@ import { ErrorPage } from './components/ErrorPage'
 import { Header } from './components/Header'
 import { Nav } from './components/Nav/Nav'
 import { Review } from './components/Review/Review'
+import { AddReview } from './components/Reviews/AddReview'
 import { Reviews } from './components/Reviews/Reviews'
 import { Users } from './components/Users/Users'
 
@@ -19,6 +20,7 @@ function App () {
         <Route path='/' element={<Reviews/>} />
         <Route path='/reviews/:review_id' element={<Review />} />
         <Route path='/users' element={<Users />} />
+        <Route path='/add-review' element = {<AddReview />} />
       </Routes>
     </main>
   )

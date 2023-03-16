@@ -3,7 +3,8 @@ import { getCategories, getReviews } from '../../utils/api'
 import { ReviewCard } from './ReviewCard'
 import { formatCategoryName } from '../../utils/utils'
 import { ErrorPage } from '../ErrorPage'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
+
 
 export const Reviews = () => {
   const [reviews, setReviews] = useState([])
@@ -18,6 +19,7 @@ export const Reviews = () => {
   })
   const [noReviewsMsg, setNoReviewsMsg] = useState(null)
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     setPage(1)
@@ -127,13 +129,15 @@ export const Reviews = () => {
       {searchParams.get('category') ? (
         <p className='catDescription'> Description: {currentCat.desc}</p>
       ) : (
-        ''
+        <p className='catDescription'> Description: All available games</p>
       )}
+       <button className='navNewReview' onClick={()=>navigate('/add-review')}>Add another review</button>
       {isLoading && page === 1 ? (
         <p className='initialPageLoad'>Loading...</p>
       ) : (
         <p className='blank'></p>
       )}
+     
       <ol className='reviewsSection'>
         {reviews.map(review => {
           return <ReviewCard key={review.review_id} review={review} />
