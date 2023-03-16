@@ -376,6 +376,10 @@ nav {
   border-radius: 7px;
 }
 
+.missing {
+  display: none;
+}
+
 /* Media queries */
 
 

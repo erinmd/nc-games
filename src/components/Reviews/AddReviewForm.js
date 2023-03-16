@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { SelectCategory } from '../Nav/SelectCategory'
+import { SelectCategoryForm } from './SelectCategoryForm'
 
 export const AddReviewForm = ({ setNewReview }) => {
   const [formFields, setFormFields] = useState({
@@ -9,18 +9,51 @@ export const AddReviewForm = ({ setNewReview }) => {
     image: ''
   })
   const [feedback, setFeedback] = useState({
-    title: { msg: '', class: 'form-none' },
-    body: { msg: '', class: 'form-none' },
-    designer: { msg: '', class: 'form-none' },
-    image: { msg: '', class: 'form-none' },
-    category: { msg: '', class: 'form-none' }
+    title: { msg: 'Required', class: 'missing' },
+    body: { msg: 'Required', class: 'missing' },
+    designer: { msg: 'Required', class: 'missing' },
+    image: { msg: '', class: 'missing' },
+    category: { msg: 'You must select a category', class: 'missing' }
   })
-  const [category, setCategory] = useState(null)
 
+  const [category, setCategory] = useState(null)
   const submitHandler = e => {
     e.preventDefault()
-    setNewReview({ ...formFields, category })
+    let readyToSubmit = true
+    const feedbackCopy = { ...feedback }
+    for (const formField in feedbackCopy) {
+      const formFieldCopy = { ...feedbackCopy[formField] }
+      if (
+        formFieldCopy.class === 'error' ||
+        formFieldCopy.class === 'missing'
+      ) {
+        formFieldCopy.class = 'error'
+        feedbackCopy[formField] = formFieldCopy
+        setFeedback(feedbackCopy)
+        readyToSubmit = false
+
+      }
+    }
+    if (readyToSubmit) {
+      setNewReview({ ...formFields, category })
+      setFormFields({
+        title: '',
+        body: '',
+        designer: '',
+        image: ''
+      })
+      setCategory(null)
+      setFeedback({
+        title: { msg: 'Required', class: 'missing' },
+        body: { msg: 'Required', class: 'missing' },
+        designer: { msg: 'Required', class: 'missing' },
+        image: { msg: '', class: 'missing' },
+        category: { msg: 'You must select a category', class: 'missing' }
+      })
+    }
   }
+
+  const imageURLRegex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/
 
   return (
     <form onSubmit={submitHandler} className='addReviewForm'>
@@ -39,10 +72,10 @@ export const AddReviewForm = ({ setNewReview }) => {
                 title: { msg: 'Required', class: 'error' }
               })
             } else {
-                setFeedback({
-                    ...feedback,
-                    title: { msg: '', class: 'form-none' }
-                })
+              setFeedback({
+                ...feedback,
+                title: { msg: '', class: 'success' }
+              })
             }
           }}
         />
@@ -64,10 +97,10 @@ export const AddReviewForm = ({ setNewReview }) => {
                 body: { msg: 'Required', class: 'error' }
               })
             } else {
-                setFeedback({
-                    ...feedback,
-                    body: { msg: '', class: 'form-none' }
-                })
+              setFeedback({
+                ...feedback,
+                body: { msg: '', class: 'success' }
+              })
             }
           }}
         />
@@ -90,10 +123,10 @@ export const AddReviewForm = ({ setNewReview }) => {
                 designer: { msg: 'Required', class: 'error' }
               })
             } else {
-                setFeedback({
-                    ...feedback,
-                    designer: { msg: '', class: 'form-none' }
-                })
+              setFeedback({
+                ...feedback,
+                designer: { msg: '', class: 'success' }
+              })
             }
           }}
         />
@@ -103,19 +136,12 @@ export const AddReviewForm = ({ setNewReview }) => {
       </section>
       <section>
         <label htmlFor='categorySelect'>Category:</label>
-        <SelectCategory setCurrentCategory={setCategory} id='categorySelect' onBlur={e => {
-            if (e.target.value=== 'Select Category') {
-              setFeedback({
-                ...feedback,
-                category: { msg: 'Required', class: 'error' }
-              })
-            } else {
-                setFeedback({
-                    ...feedback,
-                    category: { msg: 'anything', class: 'form-none' }
-                })
-            }
-          }}/>
+        <SelectCategoryForm
+          setFeedback={setFeedback}
+          feedback={feedback}
+          setCurrentCategory={setCategory}
+          id='categorySelect'
+        />
         <label htmlFor='reviewTitle' className={feedback.category.class}>
           {feedback.category.msg}
         </label>
@@ -132,13 +158,21 @@ export const AddReviewForm = ({ setNewReview }) => {
             if (e.target.value.length === 0) {
               setFeedback({
                 ...feedback,
-                image: { msg: 'A default image will be selected for you', class: 'success' }
+                image: {
+                  msg: 'A default image will be selected for you',
+                  class: 'success'
+                }
+              })
+            } else if (!imageURLRegex.test(e.target.value)) {
+              setFeedback({
+                ...feedback,
+                image: { msg: 'Invalid image url', class: 'error' }
               })
             } else {
-                setFeedback({
-                    ...feedback,
-                    image: { msg: '', class: 'form-none' }
-                })
+              setFeedback({
+                ...feedback,
+                image: { msg: '', class: 'success' }
+              })
             }
           }}
         />
