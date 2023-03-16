@@ -20,6 +20,14 @@ header {
   margin-top: 10px;
 }
 
+button { 
+  background-color: #008383;
+  color: #fffffc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+}
+
 /* Nav bar */
 
 nav {
@@ -110,10 +118,11 @@ nav {
 
 .initialPageLoad {
   text-align: center;
+  margin: 10px
 }
 
 .blank {
-  height: 18px;
+  height: 7px;
 }
 
 .reviewsSection {
@@ -168,6 +177,13 @@ nav {
 .reviewImage {
   max-width: 240px;
   max-height: 160px;
+}
+
+.navNewReview {
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px
+
 }
 
 /* Individual review page */
@@ -378,6 +394,40 @@ nav {
 
 .missing {
   display: none;
+}
+
+.newReview {
+  height: 500px;
+  width: 100%
+}
+
+.newReview h3 {
+  margin: 2px;
+}
+
+.resetButton {
+  background-color: #596c79;
+}
+
+.newReviewContainer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 10px;
+  width: 100%
+}
+
+.newReviewContainer h3{
+  margin: 5px;
+  border-bottom: solid #009999;
+  font-size: 16px;
+  font-weight: 400
+}
+
+.newReviewSubmit:disabled {
+  background-color: #596c79;
 }
 
 /* Media queries */
