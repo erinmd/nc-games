@@ -79,8 +79,17 @@ nav {
 }
 
 .navAvatar {
-  height: 50px;
-  display: inline
+  height: 80px;
+  display: inline;
+  border: solid #009999 2px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 2px;
+  margin-right: 10px;
+}
+
+.navAvatar:hover {
+  box-shadow: 0 0 8px 5px #009999
 }
 
 
@@ -152,7 +161,7 @@ nav {
 }
 
 .reviewCard:hover {
-  box-shadow: 0 0 15px 5px #7cb9a6
+  box-shadow: 0 0 15px 10px #596c79
 }
 
 
@@ -257,12 +266,79 @@ nav {
   color:  #f0f0edcf
 }
 
+/* User profile */
+
+.userPage {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.userCard {
+  box-shadow: 0 0 15px 2px #596c79c8;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 30px;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  max-width: 300px;
+  height: 300px;
+}
+
+.userCard:hover {
+  box-shadow: 0 0 15px 10px #596c79
+}
+
+.userProfileText {
+  margin: 5px;
+}
+
+.userProfileText h3 {
+  padding: 5px;
+  margin: 5px;
+}
+
+.userProfileText p {
+  padding: 5px;
+  margin: 5px;
+}
+
+.userProfileAvatar {
+  max-height: 150px;
+  max-width: 150px;
+  margin: 5px;
+  background-color: white;
+  border-radius: 8px;
+  border: solid 5px #009999
+}
+
+.selectedUser {
+  box-shadow: 0 0 15px 2px #008383;
+}
+
+.selectedUser:hover {
+  box-shadow: 0 0 15px 2px #008383;
+}
+
+
 /* Media queries */
 
 
 @media only screen and (min-width:375px) {
   nav {
-    height: 130px
+    height: 160px
   }
 }
 
@@ -275,7 +351,7 @@ nav {
 @media only screen and (min-width:520px) {
 
   nav {
-    height: 90px
+    height: 110px
   }
 
 .navContainer{
@@ -295,6 +371,23 @@ nav {
   display: inline;
   margin: 5px;
 }
+
+}
+
+@media only screen and (min-width:520px) {
+  .userCard {
+    flex-direction: row;
+    height: 170px;
+    padding: 10px 30px;
+    margin: 20px;
+    justify-content: space-between;
+    max-width: 350px
+  }
+
+  .userProfileText {
+    text-align: left;
+    margin-right: 20px
+  }
 
 }
 

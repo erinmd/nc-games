@@ -64,11 +64,11 @@ export const Nav = () => {
           <button className='navButton'> Go </button>
         </form>
       </section>
-      <img
+      <Link to='/users' ><img
         className='navAvatar'
         src={user.avatar_url}
         alt={`Avatar for ${user.username}`}
-      />
+      /></Link>
     </nav>
   )
 }

@@ -44,6 +44,12 @@ export const getCategories = () => {
     })
 }
 
+export const getUsers = () => {
+  return gamesApi.get('/users').then(({data}) => {
+    return data.users
+  })
+}
+
 export const deleteComment = (commentId) => {
   return gamesApi.delete(`/comments/${commentId}`)
 }
