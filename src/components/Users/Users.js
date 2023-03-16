@@ -22,9 +22,9 @@ export const Users = () => {
   })
 
   return (
-    <section>
+    <section className='userPage'>
       <h2>Users</h2>
-      <ol>
+      <ol className='userList'>
         <li className='userCard'>
           <div className='userProfileText'>
             <h3>Current user</h3>

@@ -80,7 +80,7 @@ nav {
   height: 50px;
   display: inline;
   border: solid #009999 2px;
-  background-color: #7cb9a6;
+  background-color: white;
   border-radius: 10px;
   padding: 2px;
   margin-right: 10px;
@@ -240,22 +240,56 @@ nav {
 
 /* User profile */
 
+.userPage {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
 .userCard {
   box-shadow: 0 0 15px 2px #596c79c8;
   display: flex;
+  flex-direction: column;
   padding: 15px;
   border-radius: 10px;
+  margin: 30px;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  max-width: 300px;
+  height: 300px;
 }
 
 .userProfileText {
-  display: inline-block;
-  margin: 10px 20px;
+  margin: 5px;
+}
+
+.userProfileText h3 {
+  padding: 0;
+  margin: 0;
+}
+
+.userProfileText p {
+  padding: 5px;
+  margin: 5px;
 }
 
 .userProfileAvatar {
-  height: 150px;
-  display: inline-block;
-  margin: 10px 20px;
+  max-height: 150px;
+  max-width: 150px;
+  margin: 5px;
+  background-color: white;
+  border-radius: 8px;
+  border: solid 5px #009999
 }
 
 
@@ -294,6 +328,23 @@ nav {
   display: inline;
   margin: 5px;
 }
+
+}
+
+@media only screen and (min-width:520px) {
+  .userCard {
+    flex-direction: row;
+    height: 170px;
+    padding: 10px 30px;
+    margin: 20px;
+    justify-content: space-between;
+    max-width: 350px
+  }
+
+  .userProfileText {
+    text-align: left;
+    margin-right: 20px
+  }
 
 }
 

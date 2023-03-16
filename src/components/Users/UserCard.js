@@ -2,7 +2,6 @@ export const UserCard = ({user}) => {
   return (
     <li className='userCard'>
       <div className='userProfileText'>
-        <h3>Current user</h3>
         <p>Username: {user.username}</p>
         <p>Name: {user.name}</p>
       </div>
