@@ -1,13 +1,27 @@
-import { useState } from 'react'
-import { updateReviewVote } from '../../utils/api'
+import { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../../contexts/User'
+import { getUserVotes, updateReviewVote, upsertUserVotes } from '../../utils/api'
 
 export const ReviewVoteButton = ({
   review_id,
   setReview,
   setButtonMessage
 }) => {
-  const [buttonClicked, setButtonClicked] = useState({up:false, down:false})
+  const [buttonClicked, setButtonClicked] = useState({up:true, down:true})
+  const {user} = useContext(UserContext)
 
+  useEffect(()=>{
+    console.log(review_id)
+    getUserVotes(user.username).then((userVotes) => {
+      if (userVotes.likes.includes(+review_id)) {
+        setButtonClicked({up:true, down:false})
+      } else if (userVotes.dislikes.includes(+review_id)) {
+        setButtonClicked({up:false, down: true})
+      } else {
+        setButtonClicked({up:false, down:false})
+      }
+    })
+  },[review_id, user.username])
 
   const voteHandler = (inc) => {
     setReview(currReview => {
@@ -42,6 +56,8 @@ export const ReviewVoteButton = ({
       }
       setButtonMessage({msg: 'Something went wrong, please try again', class:'error'})
     })
+
+    upsertUserVotes(user.username, review_id, inc)
   }
 
   return (

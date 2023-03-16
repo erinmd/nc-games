@@ -78,3 +78,15 @@ export const deleteReview = reviewId => {
 export const updateCommentVote = (commentId, inc_votes) => {
   return gamesApi.patch(`/comments/${commentId}`, { inc_votes })
 }
+
+export const getUserVotes = (username) => {
+  return gamesApi.get(`/users/${username}/votes`).then(({data}) => {
+    return data.userVotes
+  })
+}
+
+export const upsertUserVotes = (username, review_id, vote) => {
+  return gamesApi.post(`/users/${username}/votes`, {review_id, vote}).then(({data})=> {
+    return data.uservote
+  })
+}
