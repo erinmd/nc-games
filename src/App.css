@@ -79,7 +79,7 @@ nav {
 }
 
 .navAvatar {
-  height: 50px;
+  height: 80px;
   display: inline;
   border: solid #009999 2px;
   background-color: white;
@@ -297,13 +297,17 @@ nav {
   height: 300px;
 }
 
+.userCard:hover {
+  box-shadow: 0 0 15px 10px #596c79
+}
+
 .userProfileText {
   margin: 5px;
 }
 
 .userProfileText h3 {
-  padding: 0;
-  margin: 0;
+  padding: 5px;
+  margin: 5px;
 }
 
 .userProfileText p {
@@ -324,13 +328,17 @@ nav {
   box-shadow: 0 0 15px 2px #008383;
 }
 
+.selectedUser:hover {
+  box-shadow: 0 0 15px 2px #008383;
+}
+
 
 /* Media queries */
 
 
 @media only screen and (min-width:375px) {
   nav {
-    height: 130px
+    height: 160px
   }
 }
 
@@ -343,7 +351,7 @@ nav {
 @media only screen and (min-width:520px) {
 
   nav {
-    height: 90px
+    height: 110px
   }
 
 .navContainer{
