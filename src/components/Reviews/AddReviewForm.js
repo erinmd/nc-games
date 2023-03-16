@@ -12,7 +12,7 @@ export const AddReviewForm = ({ setNewReview }) => {
     title: { msg: 'Required', class: 'missing' },
     body: { msg: 'Required', class: 'missing' },
     designer: { msg: 'Required', class: 'missing' },
-    image: { msg: '', class: 'missing' },
+    image: { msg: '', class: 'success' },
     category: { msg: 'You must select a category', class: 'missing' }
   })
 
@@ -31,7 +31,6 @@ export const AddReviewForm = ({ setNewReview }) => {
         feedbackCopy[formField] = formFieldCopy
         setFeedback(feedbackCopy)
         readyToSubmit = false
-
       }
     }
     if (readyToSubmit) {
@@ -47,7 +46,7 @@ export const AddReviewForm = ({ setNewReview }) => {
         title: { msg: 'Required', class: 'missing' },
         body: { msg: 'Required', class: 'missing' },
         designer: { msg: 'Required', class: 'missing' },
-        image: { msg: '', class: 'missing' },
+        image: { msg: '', class: 'success' },
         category: { msg: 'You must select a category', class: 'missing' }
       })
     }
