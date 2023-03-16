@@ -74,3 +74,7 @@ export const postReview = review => {
 export const deleteReview = reviewId => {
   return gamesApi.delete(`/reviews/${reviewId}`)
 }
+
+export const updateCommentVote = (commentId, inc_votes) => {
+  return gamesApi.patch(`/comments/${commentId}`, { inc_votes })
+}

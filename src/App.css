@@ -43,6 +43,7 @@ nav {
   align-items: center;
   justify-content: center;
   gap: 20px;
+  box-shadow: 0 1px 5px #43515b
 }
 
 .navContainer {
@@ -282,6 +283,20 @@ nav {
   font-weight: 900
 }
 
+.commentVoteSection {
+  display:flex;
+  display:wrap;
+  align-items: center;
+}
+
+.commentVoteSection button {
+  height: 30px;
+}
+
+.commentVoteSection p {
+  margin-left: 10px
+}
+
 ::placeholder {
   color:  #f0f0edcf
 }
@@ -338,10 +353,11 @@ nav {
 .userProfileAvatar {
   max-height: 150px;
   max-width: 150px;
-  margin: 5px;
+  margin: 20px 5px;
   background-color: white;
   border-radius: 8px;
-  border: solid 5px #009999
+  border: solid 5px #009999;
+
 }
 
 .selectedUser {
