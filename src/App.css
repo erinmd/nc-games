@@ -369,6 +369,12 @@ nav {
   height: 150px;
 }
 
+.addReviewButton {
+  background-color: #008383;
+  color: #fffffc;
+  font-weight: 900;
+  border-radius: 7px;
+}
 
 /* Media queries */
 

@@ -1,31 +1,12 @@
-import { SelectCategory } from "../Nav/SelectCategory"
+import { useState } from 'react'
+import { AddReviewForm } from './AddReviewForm'
 
 export const AddReview = () => {
+  const [newReview, setNewReview] = useState(null)
   return (
     <section className='addReview'>
       <h2>Add Review</h2>
-      <form className='addReviewForm'>
-        <section>
-        <label for='reviewTitle'>Title:</label>
-        <input id='reviewTitle'/>
-        </section>
-        <section>
-        <label for='reviewBody'>Review:</label>
-        <textarea />
-        </section>
-        <section>
-        <label for='reviewDesigner'>Designer:</label>
-        <input id='reviewDesigner' />
-        </section>
-        <section>
-        <label for='categorySelect'>Category:</label>
-        <SelectCategory id='categorySelect'/>
-        </section>
-        <section>
-        <label for='reviewImage'>Image URL:</label>
-        <input id='reviewImage' />
-        </section>
-      </form>
+      <AddReviewForm setNewReview={setNewReview} />
     </section>
   )
 }
