@@ -1,3 +1,5 @@
+/* App */
+
 body {
   background-color: #1B1B24;
 }
@@ -12,13 +14,13 @@ body {
   height: 100%;
 }
 
-
-
 header {
   color: #009999;
   font-size: 50px;
   margin-top: 10px;
 }
+
+/* Nav bar */
 
 nav {
   color: #F0F0ED;
@@ -99,6 +101,7 @@ nav {
 }
 
 
+/* Reviews */
 
 .reviewsContainer {
   width: 90%;
@@ -107,6 +110,10 @@ nav {
 
 .initialPageLoad {
   text-align: center;
+}
+
+.blank {
+  height: 18px;
 }
 
 .reviewsSection {
@@ -163,6 +170,8 @@ nav {
   max-height: 160px;
 }
 
+/* Individual review page */
+
 .singleReview {
   text-align: center;
   width: 75%;
@@ -202,12 +211,31 @@ nav {
   display:flex;
   flex-direction: column;
   color: #F0F0ED;
+}
 
+.removeSection {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+
+.removeButton {
+  background-color: #596c79;
+  color: #fffffc;
+  width:150px;
+  display:inline-block;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.deleteError {
+  display: inline-block;
+  margin: 5px;
 }
 
 .error {
   color: rgb(182, 9, 9);
-  font-weight: 900
+  font-weight: 900;
 }
 
 .success {
@@ -291,6 +319,7 @@ nav {
   border-radius: 8px;
   border: solid 5px #009999
 }
+/* Media queries */
 
 
 @media only screen and (min-width:375px) {

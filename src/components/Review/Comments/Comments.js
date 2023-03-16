@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getComments } from '../../utils/api'
+import { getComments } from '../../../utils/api'
 import { AddComment } from './AddComment'
 import { CommentCard } from './CommentCard'
 
@@ -7,6 +7,7 @@ export const Comments = ({ review_id }) => {
   const [comments, setComments] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [message, setMessage] = useState(null)
+
   useEffect(() => {
     setIsLoading(true)
     getComments(review_id).then(comments => {
@@ -14,6 +15,8 @@ export const Comments = ({ review_id }) => {
       setIsLoading(false)
     })
   }, [review_id])
+
+  
   return (
     <section className='commentsSection'>
       <h3>Comments</h3>
@@ -23,7 +26,7 @@ export const Comments = ({ review_id }) => {
         <p>Loading...</p>
       ) : comments.length > 0 ? (
         <ol className='commentList'> {comments.map(comment => {
-          return <CommentCard key={comment.created_at} comment={comment} />
+          return <CommentCard key={comment.comment_id} comment={comment} setComments={setComments}/>
         })}
       </ol>) : (
         <p>No comments</p>
