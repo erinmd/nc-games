@@ -74,7 +74,7 @@ export const Review = () => {
         ''
       )}
       {showRemoveButton ? <RemoveReview reviewId={review_id} /> : ''}
-      <CommentPage review_id={review_id} comment_count={review.comment_count} />
+      <CommentPage review_id={review_id} />
     </section>
   )
 }
