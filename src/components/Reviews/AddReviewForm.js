@@ -52,7 +52,7 @@ export const AddReviewForm = ({ setNewReview }) => {
     }
   }
 
-  const imageURLRegex = /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/
+  const imageURLRegex = /(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg|.png|.svg|.gif)(\?[^\s[",><]*)?/
 
   return (
     <form onSubmit={submitHandler} className='addReviewForm'>
