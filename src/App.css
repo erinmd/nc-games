@@ -399,6 +399,29 @@ nav {
   box-shadow: 0 0 15px 2px #008383;
 }
 
+/* Individual user page */
+
+.profilePageContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.userProfilePageAvatar {
+  max-height: 300px;
+  max-width: 300px;
+  margin: 20px 5px;
+  background-color: white;
+  border-radius: 8px;
+  border: solid 5px #009999;
+
+}
+
+.chartContainer {
+  width: 500px;
+  margin-left: 20px
+}
+
+
 
 /* Add Review */
 
@@ -485,6 +508,7 @@ nav {
   padding: 0;
   margin: 0
 }
+
 
 
 /* Media queries */

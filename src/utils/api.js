@@ -90,3 +90,9 @@ export const upsertUserVotes = (username, review_id, vote) => {
     return data.uservote
   })
 }
+
+export const getUserVoteCategories = (username)=> {
+  return gamesApi.get(`users/${username}/votes/categories`).then(({data})=> {
+    return data.userVoteCategories
+  })
+}
