@@ -14,7 +14,7 @@ export const UserProfile = () => {
     </p>
   ) : (
     <section className='profilePage'>
-      <h3>User Profile</h3>
+      <h3 className='profileHeader'>User Profile</h3>
       <section className='profilePageContainer'>
         <section className='mainUserInfo'>
           <div className='userProfilePageText'>
@@ -28,7 +28,7 @@ export const UserProfile = () => {
           />
         </section>
         <section className = 'chartContainer'>
-            <h2>Which games do you like best?</h2>
+            <h2 className='chartHeader'>Which games do you like best?</h2>
             <CategoryChart />
         </section>
       </section>
