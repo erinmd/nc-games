@@ -9,11 +9,11 @@ export const AddReviewForm = ({ setNewReview }) => {
     image: ''
   })
   const [feedback, setFeedback] = useState({
-    title: { msg: 'Required', class: 'missing' },
-    body: { msg: 'Required', class: 'missing' },
-    designer: { msg: 'Required', class: 'missing' },
-    image: { msg: '', class: 'success' },
-    category: { msg: 'You must select a category', class: 'missing' }
+    title: { msg: 'Required', class: 'missing formMsg' },
+    body: { msg: 'Required', class: 'missing formMsg' },
+    designer: { msg: 'Required', class: 'missing formMsg' },
+    image: { msg: 'A default image will be selected for you', class: 'missing formMsg' },
+    category: { msg: 'You must select a category', class: 'missing formMsg' }
   })
 
   const [category, setCategory] = useState(null)
@@ -24,10 +24,11 @@ export const AddReviewForm = ({ setNewReview }) => {
     for (const formField in feedbackCopy) {
       const formFieldCopy = { ...feedbackCopy[formField] }
       if (
-        formFieldCopy.class === 'error' ||
-        formFieldCopy.class === 'missing'
+        formFieldCopy.class === 'error formMsg' ||
+        formFieldCopy.class === 'missing formMsg' 
       ) {
-        formFieldCopy.class = 'error'
+        if (formField === 'image')  formFieldCopy.class = 'success formMsg'
+        else formFieldCopy.class = 'error formMsg'
         feedbackCopy[formField] = formFieldCopy
         setFeedback(feedbackCopy)
         readyToSubmit = false
@@ -43,11 +44,11 @@ export const AddReviewForm = ({ setNewReview }) => {
       })
       setCategory(null)
       setFeedback({
-        title: { msg: 'Required', class: 'missing' },
-        body: { msg: 'Required', class: 'missing' },
-        designer: { msg: 'Required', class: 'missing' },
-        image: { msg: '', class: 'success' },
-        category: { msg: 'You must select a category', class: 'missing' }
+        title: { msg: 'Required', class: 'missing formMsg' },
+        body: { msg: 'Required', class: 'missing formMsg' },
+        designer: { msg: 'Required', class: 'missing formMsg' },
+        image: { msg: '', class: 'missing formMsg' },
+        category: { msg: 'You must select a category', class: 'missing formMsg' }
       })
     }
   }
@@ -68,23 +69,24 @@ export const AddReviewForm = ({ setNewReview }) => {
             if (e.target.value.length === 0) {
               setFeedback({
                 ...feedback,
-                title: { msg: 'Required', class: 'error' }
+                title: { msg: 'Required', class: 'error formMsg' }
               })
             } else {
               setFeedback({
                 ...feedback,
-                title: { msg: '', class: 'success' }
+                title: { msg: '', class: 'success formMsg' }
               })
             }
           }}
         />
-        <label htmlFor='reviewTitle' className={feedback.title.class}>
+        <p className={feedback.title.class}>
           {feedback.title.msg}
-        </label>
+        </p>
       </section>
       <section>
         <label htmlFor='reviewBody'>Review:</label>
         <textarea
+        id='reviewBody'
           value={formFields.body}
           onChange={e => {
             setFormFields({ ...formFields, body: e.target.value })
@@ -93,19 +95,19 @@ export const AddReviewForm = ({ setNewReview }) => {
             if (e.target.value.length === 0) {
               setFeedback({
                 ...feedback,
-                body: { msg: 'Required', class: 'error' }
+                body: { msg: 'Required', class: 'error formMsg' }
               })
             } else {
               setFeedback({
                 ...feedback,
-                body: { msg: '', class: 'success' }
+                body: { msg: '', class: 'success formMsg' }
               })
             }
           }}
         />
-        <label htmlFor='reviewBody' className={feedback.body.class}>
+        <p className={feedback.body.class}>
           {feedback.body.msg}
-        </label>
+        </p>
       </section>
       <section>
         <label htmlFor='reviewDesigner'>Designer:</label>
@@ -119,19 +121,19 @@ export const AddReviewForm = ({ setNewReview }) => {
             if (e.target.value.length === 0) {
               setFeedback({
                 ...feedback,
-                designer: { msg: 'Required', class: 'error' }
+                designer: { msg: 'Required', class: 'error formMsg' }
               })
             } else {
               setFeedback({
                 ...feedback,
-                designer: { msg: '', class: 'success' }
+                designer: { msg: '', class: 'success formMsg' }
               })
             }
           }}
         />
-        <label htmlFor='reviewDesigner' className={feedback.designer.class}>
+        <p className={feedback.designer.class}>
           {feedback.designer.msg}
-        </label>
+        </p>
       </section>
       <section>
         <label htmlFor='categorySelect'>Category:</label>
@@ -141,9 +143,9 @@ export const AddReviewForm = ({ setNewReview }) => {
           setCurrentCategory={setCategory}
           id='categorySelect'
         />
-        <label htmlFor='reviewTitle' className={feedback.category.class}>
+        <p className={feedback.category.class}>
           {feedback.category.msg}
-        </label>
+        </p>
       </section>
       <section>
         <label htmlFor='reviewImage'>Image URL:</label>
@@ -159,25 +161,25 @@ export const AddReviewForm = ({ setNewReview }) => {
                 ...feedback,
                 image: {
                   msg: 'A default image will be selected for you',
-                  class: 'success'
+                  class: 'success formMsg'
                 }
               })
             } else if (!imageURLRegex.test(e.target.value)) {
               setFeedback({
                 ...feedback,
-                image: { msg: 'Invalid image url', class: 'error' }
+                image: { msg: 'Invalid image url', class: 'error formMsg' }
               })
             } else {
               setFeedback({
                 ...feedback,
-                image: { msg: '', class: 'success' }
+                image: { msg: '', class: 'success formMsg' }
               })
             }
           }}
         />
-        <label htmlFor='reviewImage' className={feedback.image.class}>
+        <p className={feedback.image.class}>
           {feedback.image.msg}
-        </label>
+        </p>
       </section>
       <section>
         <button className='addReviewButton'>Submit</button>

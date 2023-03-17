@@ -26,8 +26,8 @@ export const updateReviewVote = (reviewId, inc_votes) => {
     })
 }
 
-export const getComments = reviewId => {
-  return gamesApi.get(`/reviews/${reviewId}/comments`).then(({ data }) => {
+export const getComments = (reviewId, p) => {
+  return gamesApi.get(`/reviews/${reviewId}/comments`, {params: {p, limit:5}}).then(({ data }) => {
     return data.comments
   })
 }
