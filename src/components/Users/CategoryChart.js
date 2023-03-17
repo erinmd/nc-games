@@ -86,8 +86,8 @@ export const CategoryChart = () => {
     datasets: [
       {
         data: categoryScores,
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)'
+        borderColor: '#009999',
+        backgroundColor: '#00999970'
       }
     ]
   }
