@@ -8,6 +8,8 @@ import { UserContext } from '../../contexts/User'
 import { OrderBy } from './OrderBy'
 import { SelectCategory } from './SelectCategory'
 import { SortBy } from './SortBy'
+import {ToggleLightMode} from './ToggleLightMode'
+
 
 export const Nav = () => {
   const [currentCategory, setCurrentCategory] = useState('Select Category')
@@ -64,11 +66,14 @@ export const Nav = () => {
           <button className='navButton'> Go </button>
         </form>
       </section>
+      <section className='avatarAndToggle'>
       <Link to='/users' ><img
         className='navAvatar'
         src={user.avatar_url}
         alt={`Avatar for ${user.username}`}
       /></Link>
+      <ToggleLightMode />
+      </section>
     </nav>
   )
 }

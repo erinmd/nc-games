@@ -23,7 +23,7 @@ export const SelectCategoryForm = ({ setCurrentCategory, setFeedback, feedback }
   })
 
   return (
-    <select onBlur={e => {
+    <select className='addReviewCat' onBlur={e => {
         if (e.target.value=== 'Select Category') {
           setFeedback({
             ...feedback,
@@ -36,7 +36,6 @@ export const SelectCategoryForm = ({ setCurrentCategory, setFeedback, feedback }
             })
         }
       }}
-      className='selectCategory'
       onChange={e => setCurrentCategory(e.target.value)}
     >
       <option value='Select Category'>Select Category</option>
