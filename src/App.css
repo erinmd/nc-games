@@ -302,6 +302,36 @@ nav {
   color:  #f0f0edcf
 }
 
+.commentPageList {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  background:#596c79;
+  color:#F0F0ED;
+  border-radius: 10px;
+  margin: 5px 15px;
+  padding: 5px;
+  font-weight: 400;
+  font-size: 18px;
+
+}
+
+.pageNumber:hover {
+  cursor: pointer;
+  font-weight: 600
+}
+
+.pageNumber {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+
 /* User profile */
 
 .userPage {

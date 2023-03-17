@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { UserContext } from '../../../contexts/User'
 import { postComment } from '../../../utils/api'
 
-export const AddComment = ({ setComments, review_id, setMessage }) => {
+export const AddComment = ({ setComments, review_id, setMessage, setPage }) => {
   const [newComment, setNewComment] = useState('')
   const { user } = useContext(UserContext)
 
@@ -10,6 +10,7 @@ export const AddComment = ({ setComments, review_id, setMessage }) => {
     event.preventDefault()
     if (newComment.length > 0) {
       setMessage({ msg: 'Loading your comment...', class: 'loading' })
+      setPage(1)
       postComment(review_id, user.username, newComment)
         .then(comment => {
           setComments(currComments => {

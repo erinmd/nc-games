@@ -2,11 +2,11 @@ import { useContext, useEffect, useState } from 'react'
 import { getReview } from '../../utils/api'
 import { ReviewVoteButton } from './ReviewVoteButton'
 import { useParams } from 'react-router-dom'
-import { Comments } from './Comments/Comments'
 import { ErrorPage } from '../ErrorPage'
 import { RemoveReview } from './RemoveReview'
 import { UserContext } from '../../contexts/User'
 import { formatCategoryName } from '../../utils/utils'
+import { CommentPage } from './Comments/CommentPage'
 
 export const Review = () => {
   const { review_id } = useParams()
@@ -74,7 +74,7 @@ export const Review = () => {
         ''
       )}
       {showRemoveButton ? <RemoveReview reviewId={review_id} /> : ''}
-      <Comments review_id={review_id} />
+      <CommentPage review_id={review_id} comment_count={review.comment_count} />
     </section>
   )
 }
