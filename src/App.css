@@ -408,7 +408,7 @@ nav {
 
 .userProfilePageAvatar {
   max-height: 300px;
-  max-width: 300px;
+  max-width: 280px;
   margin: 20px 5px;
   background-color: white;
   border-radius: 8px;
@@ -417,7 +417,7 @@ nav {
 }
 
 .chartContainer {
-  width: 500px;
+  width: 280px;
   margin-left: 20px
 }
 
@@ -522,6 +522,12 @@ nav {
 
     width: 85%
   }
+
+  .chartContainer {
+    width: 340px;
+    margin-left: 20px
+  }
+  
 }
 
 @media only screen and (min-width:500px) {
@@ -531,7 +537,11 @@ nav {
 }
 
 @media only screen and (min-width:520px) {
-
+  .chartContainer {
+    width: 440px;
+    margin-left: 20px
+  }
+  
   nav {
     height: 110px
   }
