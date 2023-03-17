@@ -27,7 +27,7 @@ export const SelectCategoryForm = ({ setCurrentCategory, setFeedback, feedback }
         if (e.target.value=== 'Select Category') {
           setFeedback({
             ...feedback,
-            category: { msg: 'You must select a category', class: 'error' }
+            category: { msg: 'You must select a category', class: 'error formMsg' }
           })
         } else {
             setFeedback({

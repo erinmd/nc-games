@@ -414,7 +414,7 @@ nav {
 }
 
 .missing {
-  display: none;
+  visibility: hidden;
 }
 
 .newReview {
@@ -450,6 +450,12 @@ nav {
 .newReviewSubmit:disabled {
   background-color: #596c79;
 }
+
+.formMsg {
+  padding: 0;
+  margin: 0
+}
+
 
 /* Media queries */
 
