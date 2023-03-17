@@ -1,12 +1,23 @@
 /* App */
 
+.dark { 
+  --background-color:#1B1B24;
+  --text-color: #F0F0ED;
+}
+
+.light {
+  --background-color: #F0F0ED;
+  --text-color: #1B1B24;
+}
+
+
 body {
-  background-color: #1B1B24;
+  background-color: var(--background-color);
 }
 
 .appContainer {
-  background-color: #1B1B24;
-  color: #F0F0ED;
+  background-color: var(--background-color);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -106,12 +117,29 @@ nav {
   box-shadow: 0 0 8px 5px #009999
 }
 
+.avatarAndToggle {
+  display: flex;
+  flex-wrap:wrap;
+}
+
 
 .selectCategory {
-  background-color: #1B1B24;
-  color: #F0F0ED;
+  background-color: var(--background-color);
+  color: var(--text-color);
   padding: 5px 10px;
   border-radius: 5px;
+  margin: 0 2px;
+}
+
+/* Toggle theme */
+
+.ToggleLightMode {
+  display : flex;
+  align-items: center;
+}
+
+.ToggleLightMode--inline-text {
+  font-size: 12px
 }
 
 
@@ -224,7 +252,7 @@ nav {
 }
 
 .commentCard {
-  background-color:#1B1B24;
+  background-color:var(--background-color);
   list-style: none;
   text-align: left;
   border-radius: 10px;
@@ -233,7 +261,7 @@ nav {
   box-shadow:0 0 10px 2px #F0F0ED;
   display:flex;
   flex-direction: column;
-  color: #F0F0ED;
+  color: var(--text-color)
 }
 
 .removeSection {
@@ -266,11 +294,11 @@ nav {
 }
 
  .textBox{
-  background-color:#1B1B24;
+  background-color:var(--background-color);
   height: 60px;
   resize: none;
   display: block;
-  color: #F0F0ED;
+  color: var(--text-color);
   list-style: none;
   text-align: left;
   border: 0px;
@@ -470,16 +498,23 @@ nav {
 }
 
 .addReviewForm section input, textarea {
-  background-color: #1B1B24;
+  background-color: var(--background-color);
   border: solid 2px #596c7968;
   border-radius: 5px;
-  color: #F0F0ED;
+  color: var(--text-color);
   padding: 5px 5px;
 }
 
 .addReviewForm section textarea {
   resize: none;
   height: 150px;
+}
+
+.addReviewCat {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  padding: 5px 5px;
 }
 
 .addReviewButton {
@@ -553,11 +588,7 @@ nav {
   
 }
 
-@media only screen and (min-width:500px) {
-  nav {
-    height: 110px
-  }
-}
+
 
 @media only screen and (min-width:520px) {
   .chartContainer {
@@ -565,12 +596,8 @@ nav {
     margin-left: 20px
   }
   
-  nav {
-    height: 110px
-  }
-
-.navContainer{
-  display: flex
+.linkText{ 
+  margin: 10px 14px;
 }
 .formFlex {
   margin: 5px;

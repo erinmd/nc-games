@@ -31,7 +31,7 @@ export const DisplayNewReview = ({ review, setNewReview }) => {
       <h4>{review.title}</h4>
       <p>Designer: {review.designer}</p>
       <img onError={addDefaultSrc} className='reviewImage' src={review.image} alt={review.title} />
-      <p class='success'>{imageMessage}</p>
+      <p className='success'>{imageMessage}</p>
       <p>Review: {review.body}</p>
       <p>Category: {review.category}</p>
       <p>Owner: {user.username}</p>
