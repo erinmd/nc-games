@@ -11,7 +11,6 @@ export const ReviewVoteButton = ({
   const {user} = useContext(UserContext)
 
   useEffect(()=>{
-    console.log(review_id)
     getUserVotes(user.username).then((userVotes) => {
       if (userVotes.likes.includes(+review_id)) {
         setButtonClicked({up:true, down:false})

@@ -3,7 +3,7 @@ import { UserContext } from '../../../contexts/User'
 import { CommentVoteButton } from './CommentVote'
 import { DeleteComment } from './DeleteComment'
 
-export const CommentCard = ({ comment, setComments }) => {
+export const CommentCard = ({ comment, setMessage }) => {
   const { user } = useContext(UserContext)
   const [errorMessage, setErrorMessage] = useState(null)
   const [deleteSuccessful, setDeleteSuccessful] = useState(false)
@@ -23,6 +23,7 @@ export const CommentCard = ({ comment, setComments }) => {
             commentId={comment.comment_id}
             setErrorMessage={setErrorMessage}
             setDeleteSuccessful={setDeleteSuccessful}
+            setMessage={setMessage}
           />
           {errorMessage ? (
             <p className='error deleteError'>{errorMessage}</p>

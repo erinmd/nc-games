@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from 'react'
 import { getReview } from '../../utils/api'
 import { ReviewVoteButton } from './ReviewVoteButton'
 import { useParams } from 'react-router-dom'
-import { Comments } from './Comments/Comments'
 import { ErrorPage } from '../ErrorPage'
 import { RemoveReview } from './RemoveReview'
 import { UserContext } from '../../contexts/User'
+import { formatCategoryName } from '../../utils/utils'
+import { CommentPage } from './Comments/CommentPage'
 
 export const Review = () => {
   const { review_id } = useParams()
@@ -57,7 +58,7 @@ export const Review = () => {
       />
       <p>Review:</p>
       <p>{review.review_body}</p>
-      <p>Category: {review.category}</p>
+      <p>Category: {formatCategoryName(review.category)}</p>
       <p>Owner: {review.owner}</p>
       <p>Created at: {new Date(review.created_at).toDateString()}</p>
       <p>Comments: {review.comment_count}</p>
@@ -73,7 +74,7 @@ export const Review = () => {
         ''
       )}
       {showRemoveButton ? <RemoveReview reviewId={review_id} /> : ''}
-      <Comments review_id={review_id} />
+      <CommentPage review_id={review_id} />
     </section>
   )
 }

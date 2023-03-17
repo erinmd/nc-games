@@ -1,4 +1,5 @@
 import {useNavigate} from 'react-router-dom'
+import { formatCategoryName } from '../../utils/utils'
 
 export const ReviewCard = ({review}) => {
     const navigate = useNavigate()
@@ -9,7 +10,7 @@ export const ReviewCard = ({review}) => {
         <h3>{review.title}</h3>
         <p>Designer: {review.designer}</p>
         <img className='reviewImage' src={review.review_img_url} alt={review.title}/>
-        <p>Category: {review.category}</p>
+        <p>Category: {formatCategoryName(review.category)}</p>
         <p>Owner: {review.owner}</p>
         <p>Created at: {new Date(review.created_at).toDateString()}</p>
         <p>Votes: {review.votes} Comments: {review.comment_count}</p>
