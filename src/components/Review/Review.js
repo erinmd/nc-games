@@ -6,6 +6,7 @@ import { Comments } from './Comments/Comments'
 import { ErrorPage } from '../ErrorPage'
 import { RemoveReview } from './RemoveReview'
 import { UserContext } from '../../contexts/User'
+import { formatCategoryName } from '../../utils/utils'
 
 export const Review = () => {
   const { review_id } = useParams()
@@ -57,7 +58,7 @@ export const Review = () => {
       />
       <p>Review:</p>
       <p>{review.review_body}</p>
-      <p>Category: {review.category}</p>
+      <p>Category: {formatCategoryName(review.category)}</p>
       <p>Owner: {review.owner}</p>
       <p>Created at: {new Date(review.created_at).toDateString()}</p>
       <p>Comments: {review.comment_count}</p>
