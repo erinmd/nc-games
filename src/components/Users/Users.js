@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../../contexts/User'
 import { getUsers } from '../../utils/api'
 import { UserCard } from './UserCard'
@@ -33,6 +34,7 @@ export const Users = () => {
             <h3>Current user</h3>
             <p>Username: {user.username}</p>
             <p>Name: {user.name}</p>
+            <Link to={`/users/${user.username}`} ><button>Profile</button></Link>
           </div>
           <img
             className='userProfileAvatar'

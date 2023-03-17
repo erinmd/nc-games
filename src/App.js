@@ -6,6 +6,7 @@ import { Nav } from './components/Nav/Nav'
 import { Review } from './components/Review/Review'
 import { AddReview } from './components/Reviews/AddReview'
 import { Reviews } from './components/Reviews/Reviews'
+import { UserProfile } from './components/Users/UserProfile'
 import { Users } from './components/Users/Users'
 
 function App () {
@@ -20,6 +21,7 @@ function App () {
         <Route path='/' element={<Reviews/>} />
         <Route path='/reviews/:review_id' element={<Review />} />
         <Route path='/users' element={<Users />} />
+        <Route path='/users/:username' element={<UserProfile />}/>
         <Route path='/add-review' element = {<AddReview />} />
       </Routes>
     </main>

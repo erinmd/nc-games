@@ -10,7 +10,6 @@ export const CommentPage = ({ review_id}) => {
   const [pageNumbers, setPageNumbers] = useState([])
 
   useEffect(() => {
-    console.log(review_id)
     getReview(review_id).then(review => {
         let comment_count = review.comment_count
         const initialPageNumbers = []
