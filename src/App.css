@@ -258,7 +258,7 @@ nav {
   border-radius: 10px;
   padding: 5px;
   margin: 15px;
-  box-shadow:0 0 10px 2px #F0F0ED;
+  box-shadow:0 0 10px 2px var(--text-color);
   display:flex;
   flex-direction: column;
   color: var(--text-color)
