@@ -10,7 +10,13 @@ The game reviews have an up/down vote button which is also stored in the backend
 
 Comments also have an up/down vote. Comments are ordered by most votes.
 
-Users can delete their own comments, and also their own reviews - but only those they have recently created that do not have comments or votes yet.
+Users can add comments, and post new reviews. Form validation is used, and then a further check is given in the reviews case.
+
+Users can delete their own comments, and also their own reviews - but only those they have recently created that do not have comments or votes yet. The best way to test this is to create your own review, which you will then be able to delete.
+
+Error handling has been considered for invalid paths and inputs. This is clearly communicated to the user.
+
+I have used mobile first design, focussing on ensuring the content is clear for all different displays. I have considered accessibility, and all pages of the website rate 100% when using lighthouse.
 
 ## Back end api
 
