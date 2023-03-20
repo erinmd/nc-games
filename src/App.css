@@ -310,13 +310,14 @@ nav {
 .commentButton {
   background-color: #008383;
   color: #fffffc;
-  font-weight: 900
+  font-weight: 1000
 }
 
 .commentVoteSection {
   display:flex;
   display:wrap;
   align-items: center;
+  font-size: 24px;
 }
 
 .commentVoteSection button {

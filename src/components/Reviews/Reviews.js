@@ -104,9 +104,9 @@ export const Reviews = () => {
 
   useEffect(() => {
     function handleScroll () {
-      const scrollTop = document.documentElement.scrollTop
+      const scrollTop = window.scrollY
       const scrollHeight = document.documentElement.scrollHeight
-      const clientHeight = document.documentElement.clientHeight
+      const clientHeight = window.innerHeight
       if (scrollTop + clientHeight >= scrollHeight && hasMore) {
         setPage(page + 1)
       }
