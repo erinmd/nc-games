@@ -24,7 +24,7 @@ export const Reviews = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    setTimeout(()=>{if(!totalReviews) setServerMsg('Server is warming up... This could take up to 30 seconds (using free api host)')}, 2000)
+    setTimeout(()=>{if(!totalReviews) setServerMsg('Server is warming up... This could take up to 30 seconds (using free hosting)')}, 2000)
     setPage(1)
     setHasMore(true)
     setErrorMessage(null)
