@@ -2,39 +2,21 @@ import { useEffect, useState } from 'react'
 import { getReview } from '../../../utils/api'
 import { AddComment } from './AddComment'
 import { Comments } from './Comments'
+import { Pagination } from '@mui/material'
 
 export const CommentPage = ({ review_id}) => {
   const [comments, setComments] = useState([])
   const [message, setMessage] = useState(null)
   const [page, setPage] = useState(1)
-  const [pageNumbers, setPageNumbers] = useState([])
+  const [pageNumbers, setPageNumbers] = useState(0)
 
   useEffect(() => {
     getReview(review_id).then(review => {
-        let comment_count = review.comment_count
-        const initialPageNumbers = []
-        for (let i = 1; i <= Math.ceil(comment_count / 5); i++) {
-      initialPageNumbers.push(i)
-    }
-    setPageNumbers(initialPageNumbers)
+    setPageNumbers(Math.ceil(review.comment_count/5))
     }).catch(err=>console.log(err))
     
     
   }, [review_id, comments])
-
-  const pageListItems = pageNumbers.map(currentPage => {
-    let pageClass = 'pageNumber'
-    if (page === currentPage) pageClass = ' currentPage'
-    return (
-      <li
-        className={pageClass}
-        onClick={() => setPage(currentPage)}
-        key={currentPage}
-      >
-        {currentPage}
-      </li>
-    )
-  })
 
   return (
     <section className='commentsSection'>
@@ -55,7 +37,7 @@ export const CommentPage = ({ review_id}) => {
         setComments={setComments}
       />
 
-      <ol className='commentPageList'>{pageListItems}</ol>
+      <Pagination variant='outlined' count={pageNumbers} onChange={(e,value) => setPage(value)} page={page} />
     </section>
   )
 }
