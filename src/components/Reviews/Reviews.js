@@ -113,11 +113,9 @@ export const Reviews = () => {
     }
 
     window.addEventListener('scroll', handleScroll)
-    window.addEventListener('touchmove', handleScroll)
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('touchmove', handleScroll)}
+    return () => window.removeEventListener('scroll', handleScroll)
+
   }, [reviews, page, hasMore])
 
   return errorMessage ? (
