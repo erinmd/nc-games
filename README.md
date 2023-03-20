@@ -30,12 +30,19 @@ Node >= v19.8
 
 ## How to run this project locally
 
-1. Clone the repo
-2. Create a new GitHub repo, do not initialise the project with a readme, .gitignore or license.
-3. From your cloned local version of this project you'll want to push your code to your new repo using the following commands:
-
+1. Fork and clone the repo
 ```
-git remote set-url origin YOUR_NEW_REPO_URL_HERE
-git branch -M main
-git push -u origin main
+$ git clone <forked-repo-url>
+```
+2. Navigate to the correct folder
+```
+$ cd nc-games
+```
+3. Install dependencies
+```
+$ npm i 
+```
+4. Start it up locally
+```
+$ npm start
 ```
