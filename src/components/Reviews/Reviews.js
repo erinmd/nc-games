@@ -4,6 +4,7 @@ import { ReviewCard } from './ReviewCard'
 import { formatCategoryName } from '../../utils/utils'
 import { ErrorPage } from '../ErrorPage'
 import { useSearchParams, useNavigate } from 'react-router-dom'
+import { CircularProgress} from '@mui/material'
 
 
 export const Reviews = () => {
@@ -17,11 +18,13 @@ export const Reviews = () => {
     desc: 'Loading...',
     name: 'Loading'
   })
+  const [serverMsg, setServerMsg] = useState('')
   const [noReviewsMsg, setNoReviewsMsg] = useState(null)
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
   useEffect(() => {
+    setTimeout(()=>{if(!totalReviews) setServerMsg('Server is warming up... This could take up to 30 seconds (using free api host)')}, 2000)
     setPage(1)
     setHasMore(true)
     setErrorMessage(null)
@@ -37,6 +40,7 @@ export const Reviews = () => {
         setTotalReviews(returnedReviews[0].total_count)
         setReviews(returnedReviews)
         setIsLoading(false)
+        setServerMsg('')
         if (returnedReviews.length === 0) setNoReviewsMsg('No reviews found.')
         if (returnedReviews.length > totalReviews - 10) {
           setHasMore(false)
@@ -44,6 +48,7 @@ export const Reviews = () => {
       })
       .catch(err => {
         setIsLoading(false)
+        setServerMsg('')
         if (err.response) {
           setErrorMessage(
             `${err.response.data.msg}. Please use the navigation bar!`
@@ -54,6 +59,7 @@ export const Reviews = () => {
 
   useEffect(() => {
     if (hasMore && page > 1) {
+      setServerMsg('')
       setIsLoading(true)
       getReviews(
         searchParams.get('category'),
@@ -134,7 +140,11 @@ export const Reviews = () => {
       )}
        <button className='navNewReview' onClick={()=>navigate('/add-review')}>Add another review</button>
       {isLoading && page === 1 ? (
-        <p className='initialPageLoad'>Loading...</p>
+      <div className='initialPageLoad'>
+        <CircularProgress />
+        <p className='initialPageLoad'>{serverMsg}</p>
+        </div>
+        
       ) : (
         <p className='blank'></p>
       )}
@@ -146,7 +156,7 @@ export const Reviews = () => {
       </ol>
 
       {isLoading && page > 1 ? (
-        <p className='initialPageLoad'>Loading...</p>
+        <div className='initialPageLoad'><CircularProgress /></div>
       ) : noReviewsMsg ? (
         <p className='initialPageLoad'>{noReviewsMsg}</p>
       ) : !hasMore ? (

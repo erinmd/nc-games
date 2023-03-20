@@ -7,6 +7,7 @@ import { RemoveReview } from './RemoveReview'
 import { UserContext } from '../../contexts/User'
 import { formatCategoryName } from '../../utils/utils'
 import { CommentPage } from './Comments/CommentPage'
+import { CircularProgress} from '@mui/material'
 
 export const Review = () => {
   const { review_id } = useParams()
@@ -45,7 +46,7 @@ export const Review = () => {
     <ErrorPage error={pathError} />
   ) : isLoading ? (
     <section className='singleReview'>
-      <p>Loading...</p>
+      <CircularProgress />
     </section>
   ) : (
     <section className='singleReview'>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getComments } from '../../../utils/api'
 import { CommentCard } from './CommentCard'
+import { CircularProgress} from '@mui/material'
 
 export const Comments = ({ review_id, page, setMessage, comments, setComments }) => {
 
@@ -16,7 +17,7 @@ export const Comments = ({ review_id, page, setMessage, comments, setComments })
   }, [review_id, page, setIsLoading, setMessage, setComments])
 
   return (
-    isLoading ? <p>Loading...</p> : comments.length > 0 ?
+    isLoading ? <div className='initialPageLoad' ><CircularProgress/></div>: comments.length > 0 ?
     <ol className='commentList'>
       {comments.map(comment => {
         return (

@@ -11,6 +11,7 @@ import {
 import { Bar } from 'react-chartjs-2'
 import { getUserVoteCategories } from '../../utils/api'
 import { UserContext } from '../../contexts/User'
+import { CircularProgress} from '@mui/material'
 
 export const CategoryChart = () => {
   const { user } = useContext(UserContext)
@@ -53,9 +54,9 @@ export const CategoryChart = () => {
   ]
 
   const [categoryScores, setCategoryScores] = useState([0, 0, 0, 0, 0, 0, 0])
-
+  const [isLoading, setIsLoading] = useState(true)
   useEffect(() => {
-
+    setIsLoading(true)
     const startingScores = [0, 0, 0, 0, 0, 0, 0]
 
     const categoryOptions = [
@@ -78,6 +79,7 @@ export const CategoryChart = () => {
         startingScores[index] += -1
       })
       setCategoryScores(startingScores)
+      setIsLoading(false)
     })
   },[user.username])
 
@@ -92,5 +94,5 @@ export const CategoryChart = () => {
     ]
   }
 
-  return <Bar className='chart' options={options} data={data} />
+  return isLoading ?  <div className='initialPageLoad'><CircularProgress /> </div> : <Bar className='chart' options={options} data={data} />
 }

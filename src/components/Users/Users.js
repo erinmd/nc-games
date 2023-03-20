@@ -3,18 +3,22 @@ import { Link } from 'react-router-dom'
 import { UserContext } from '../../contexts/User'
 import { getUsers } from '../../utils/api'
 import { UserCard } from './UserCard'
+import { CircularProgress} from '@mui/material'
 
 export const Users = () => {
   const { user} = useContext(UserContext)
   const [users, setUsers] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
+    setIsLoading(true)
     getUsers().then(users => {
       setUsers(
         users.filter(singleUser => {
           return singleUser.username !== user.username
         })
       )
+      setIsLoading(false)
     })
   }, [user.username])
 
@@ -42,7 +46,7 @@ export const Users = () => {
             alt={user.username}
           />
         </li>
-        {userCards}
+        {isLoading ?  <div className='initialPageLoad'><CircularProgress /> </div> : userCards }
       </ol>
     </section>
   )
