@@ -48,14 +48,14 @@ export const CommentVoteButton = ({
     <>
       <button
         disabled={buttonClicked.up}
-        className='reviewVoteButton'
+        className='reviewVoteButton commentVoteButton'
         onClick={()=>voteHandler(1)}
       >
         ⬆
       </button>
       <button
         disabled={buttonClicked.down}
-        className='reviewVoteButton'
+        className='reviewVoteButton commentVoteButton'
         onClick={()=>voteHandler(-1)}
       >
        ⬇
