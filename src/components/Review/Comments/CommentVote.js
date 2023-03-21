@@ -10,9 +10,7 @@ export const CommentVoteButton = ({
 
 
   const voteHandler = (inc) => {
-    setCommentVote(currVote => {
-      return currVote + inc
-    })
+    
     if (!buttonClicked.up && !buttonClicked.down){
       if (inc===1) {
         setButtonClicked({up:true, down:false})
@@ -24,7 +22,12 @@ export const CommentVoteButton = ({
     } else {
       setButtonClicked({up:false, down:false})
       setButtonMessage({msg: 'Your vote has been reset!', class:'success'})
+      if (inc === 1 && buttonClicked.up || inc === -1 && buttonClicked.down) inc *= -1
     }
+
+    setCommentVote(currVote => {
+      return currVote + inc
+    })
     
     
     updateCommentVote(comment_id, inc).catch(err => {
@@ -47,15 +50,15 @@ export const CommentVoteButton = ({
   return (
     <>
       <button
-        disabled={buttonClicked.up}
-        className='reviewVoteButton commentVoteButton'
+
+        className={`reviewVoteButton commentVoteButton ${buttonClicked.up}`}
         onClick={()=>voteHandler(1)}
       >
         ⬆
       </button>
       <button
-        disabled={buttonClicked.down}
-        className='reviewVoteButton commentVoteButton'
+
+        className={`reviewVoteButton commentVoteButton ${buttonClicked.down}`}
         onClick={()=>voteHandler(-1)}
       >
        ⬇

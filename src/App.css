@@ -237,7 +237,7 @@ nav {
   background-color: #a4adb3;
 }
 
-.reviewVoteButton:disabled {
+.true {
   background-color: #009999;
 }
 

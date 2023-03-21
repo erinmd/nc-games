@@ -23,9 +23,7 @@ export const ReviewVoteButton = ({
   },[review_id, user.username])
 
   const voteHandler = (inc) => {
-    setReview(currReview => {
-      return { ...currReview, votes: currReview.votes + inc }
-    })
+    
     if (!buttonClicked.up && !buttonClicked.down){
       if (inc===1) {
         setButtonClicked({up:true, down:false})
@@ -37,7 +35,12 @@ export const ReviewVoteButton = ({
     } else {
       setButtonClicked({up:false, down:false})
       setButtonMessage({msg: 'Your vote has been reset!', class:'success'})
+      if (inc === 1 && buttonClicked.up || inc === -1 && buttonClicked.down) inc *= -1
     }
+
+    setReview(currReview => {
+      return { ...currReview, votes: currReview.votes + inc }
+    })
     
     
     updateReviewVote(review_id, inc).catch(err => {
@@ -62,15 +65,13 @@ export const ReviewVoteButton = ({
   return (
     <>
       <button
-        disabled={buttonClicked.up}
-        className='reviewVoteButton'
+        className={`reviewVoteButton ${buttonClicked.up}`}
         onClick={()=>voteHandler(1)}
       >
         👍
       </button>
       <button
-        disabled={buttonClicked.down}
-        className='reviewVoteButton'
+        className={`reviewVoteButton ${buttonClicked.down}`}
         onClick={()=>voteHandler(-1)}
       >
         👎
